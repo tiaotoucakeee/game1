@@ -1,9 +1,23 @@
-export default function Home() {
+import type { Metadata } from "next";
+import { Mail163Entry } from "@/components/mail163/Mail163Entry";
+import { PAGE_TITLES } from "@/lib/page-titles";
+
+export const metadata: Metadata = {
+  title: PAGE_TITLES.mail,
+  description: "中国传媒大学校内邮箱",
+};
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ profile?: string; mail?: string; skipIntro?: string }>;
+}) {
+  const params = await searchParams;
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <p className="text-muted-foreground">
-        Clone target not yet built. Run <code className="font-mono text-foreground">/clone-website</code> to start.
-      </p>
-    </main>
+    <Mail163Entry
+      initialView={params.profile ? "profile" : "inbox"}
+      initialSelectedId={params.mail}
+      skipIntro={params.skipIntro === "1"}
+    />
   );
 }

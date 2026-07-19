@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="os-windows screen-desktop-wide device-desktop" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>首页</title>
+  <link rel="stylesheet" href="https://expert.cuc.edu.cn/zui-1.10.0-dist/dist/css/zui.min.css?v=20260415">
+  <link rel="stylesheet" href="/audit-expert/iconfont.css">
+  <link rel="stylesheet" href="/audit-expert/WZJStyle.css">
+  <link rel="stylesheet" href="/audit-expert/MainHome.css">
+  <link rel="stylesheet" href="/audit-expert/HomeNoticeList.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #eef2f6; }
+    .container-filud { padding: 8px 10px 12px; }
+    .mainhome-layout {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .mainhome-layout__main {
+      flex: 3 1 0;
+      min-width: 420px;
+    }
+    .mainhome-layout__side {
+      flex: 2 1 0;
+      min-width: 400px;
+      max-width: 480px;
+      width: auto;
+    }
+    .widget { background: #fff; border: 1px solid #ddd; margin-bottom: 12px; }
+    .widget-header { background: linear-gradient(180deg, #fafcff 0%, #f3f7fb 100%); }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0;
+    }
+    .cards .card-item {
+      flex: 0 0 calc(50% - 6px);
+      min-width: 140px;
+      padding: 0;
+    }
+    .cards .card-item--full {
+      flex: 0 0 100%;
+      max-width: none;
+    }
+    .noticeBox .list-group-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      overflow: visible;
+      padding: 8px 12px;
+      border-bottom: 1px dashed #cecece;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .noticeBox .list-group-item:hover {
+      background: #3280fc;
+      color: #fff;
+    }
+    .noticeBox .announcementBox {
+      float: none;
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: none;
+    }
+    .noticeBox .announcementBox .title {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+    .noticeBox .pull-right {
+      float: none;
+      flex-shrink: 0;
+      white-space: nowrap;
+      color: #999;
+      font-size: 12px;
+    }
+    .noticeBox .list-group-item:hover .pull-right { color: #fff; }
+    .redColor { color: #d9534f !important; }
+    .noticeBox .list-group-item:hover .redColor { color: #fff !important; }
+    .MainHomeRightMore { font-size: 13px; color: #337ab7; text-decoration: none; line-height: 44px; cursor: pointer; }
+    .GongGaomenuBox { text-align: right; }
+    .RightTitle { overflow: hidden; }
+    .LeftFloat { float: left; }
+    .RightFloat { float: right; }
+    .mg-r-10 { margin-right: 10px; }
+    .mg-r-5 { margin-right: 5px; }
+    a.card { text-decoration: none; color: #000; display: block; cursor: pointer; }
+    a.card:hover { background: #f5f9ff; }
+    #mainHomeList_01 .widget-body { min-height: 120px; }
+    @media (max-width: 860px) {
+      .mainhome-layout { flex-direction: column !important; }
+      .mainhome-layout__side { flex: 1 1 auto; width: 100%; max-width: none; }
+    }
+  </style>
+  <script src="/audit-expert/jquery-3.6.1.min.js"></script>
+</head>
+<body class="Body-2031">
+  <div class="container-filud">
+    <div class="mainhome-layout">
+      <div class="mainhome-layout__main">
+        <div class="widget" id="mainHomeList_01">
+          <div class="widget-header bordered-bottom bordered-info">
+            <span class="widget-caption">
+              <i class="icon icon-th-list mg-r-5"></i>
+              <span class="KeyFname">档案审核事务</span>
+            </span>
+          </div>
+          <div class="widget-body">
+            <div class="collapse in">
+              <div class="cards">
+                <div class="card-item card-item--full">
+                  <a class="card clearfix" href="javascript:void(0)" data-path="/audit/graduates">
+                    <div class="iconfontBox"><i class="iconfont icon-xuesheng"></i></div>
+                    <div class="cardContent"><span>2034届优秀毕业生审核档案</span></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mainhome-layout__side">
+        <div class="mainHomeRightTab widget">
+          <div class="widget-header bordered-bottom bordered-info RightTitle" style="min-height:44px">
+            <div class="LeftFloat widget-caption"><i class="icon icon-volume-up mg-r-5"></i><span>通知公告</span></div>
+            <div class="RightFloat GongGaomenuBox mg-r-10">
+              <a href="javascript:void(0)" class="MainHomeRightMore" data-notice="1">更多</a>
+            </div>
+          </div>
+          <div class="tab-content widget-body">
+            <div class="tab-pane fade active in" id="tabNotice">
+              <div class="list-group noticeBox">
+                <a class="list-group-item clearfix" href="javascript:void(0)" data-notice="1" title="2034届优秀毕业生档案临时核对工作安排">
+                  <div class="pull-left announcementBox"><span class="redColor title LeftFloat">【重要】2034届优秀毕业生档案临时核对工作安排</span></div>
+                  <div class="pull-right">2036-07-01</div>
+                </a>
+                <a class="list-group-item clearfix" href="javascript:void(0)" data-notice="1">
+                  <div class="pull-left announcementBox"><span class="redColor title LeftFloat">学院年度创新成果奖评选结果已公示</span></div>
+                  <div class="pull-right">2030-06-12</div>
+                </a>
+                <a class="list-group-item clearfix" href="javascript:void(0)" data-notice="1">
+                  <div class="pull-left announcementBox"><span class="title LeftFloat">Ani AI 智能畅课平台正式启用通知</span></div>
+                  <div class="pull-right">2030-09-01</div>
+                </a>
+                <a class="list-group-item clearfix" href="javascript:void(0)" data-notice="1">
+                  <div class="pull-left announcementBox"><span class="title LeftFloat">虚拟制作联合实验室启用通知</span></div>
+                  <div class="pull-right">2030-03-15</div>
+                </a>
+                <a class="list-group-item clearfix" href="javascript:void(0)" data-notice="1">
+                  <div class="pull-left announcementBox"><span class="title LeftFloat">Aniwow! 2030 学院奖评选通知</span></div>
+                  <div class="pull-right">2030-05-20</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget" id="rightMainHomeList_01">
+          <div class="widget-header bordered-bottom bordered-info RightTitle">
+            <span class="widget-caption"><i class="icon icon-th-list mg-r-5"></i><span>综合事务</span></span>
+          </div>
+          <div class="widget-body">
+            <div class="collapse in">
+              <div class="cards">
+                <div class="card-item">
+                  <a class="card clearfix" href="javascript:void(0)" data-path="/audit/lab">
+                    <div class="iconfontBox"><i class="iconfont icon-xiazai"></i></div>
+                    <div class="cardContent"><span>实验室申请记录查询</span></div>
+                  </a>
+                </div>
+                <div class="card-item">
+                  <a class="card clearfix" href="javascript:void(0)" data-path="/audit/project">
+                    <div class="iconfontBox"><i class="iconfont icon-xitong"></i></div>
+                    <div class="cardContent"><span>项目查询</span></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/audit-expert/mainhome-bridge.js"></script>
+</body>
+</html>

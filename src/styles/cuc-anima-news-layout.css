@@ -1,0 +1,255 @@
+/* 学院新闻列表 — 克隆 news-zh.html */
+
+.cuc-news-layout {
+  margin-top: -96px;
+}
+
+.cuc-news-page {
+  position: relative;
+  color: #343a40;
+}
+
+.cuc-news-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.cuc-news-page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-news-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cuc-news-section-first {
+  padding: 200px 0 0;
+}
+
+.cuc-news-section {
+  padding: 100px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cuc-news-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.cuc-news-header-title {
+  margin-bottom: 16px;
+}
+
+.cuc-news-title-big {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-news-intro {
+  margin: 0;
+  min-width: 180px;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.cuc-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cuc-news-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #343a40;
+  background-color: #fff;
+  border: 1px solid #b7b7b7;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.cuc-news-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.cuc-news-card-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: 50% 29%;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cuc-news-card-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-height: 168px;
+  padding: 16px;
+  background-color: #fff;
+  text-align: left;
+  transform: translateY(0);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cuc-news-card:hover .cuc-news-card-body,
+.cuc-news-card:focus-visible .cuc-news-card-body {
+  transform: translateY(-88px);
+}
+
+.cuc-news-card:hover .cuc-news-card-img,
+.cuc-news-card:focus-visible .cuc-news-card-img {
+  transform: scale(1.03);
+}
+
+.cuc-news-card-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.cuc-news-card-date {
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 0;
+  color: #717171;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cuc-news-card-excerpt {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 500;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s ease 0.06s,
+    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.35s ease,
+    transform 0.35s ease 0.06s;
+}
+
+.cuc-news-card:hover .cuc-news-card-excerpt,
+.cuc-news-card:focus-visible .cuc-news-card-excerpt {
+  opacity: 1;
+  max-height: 120px;
+  margin-top: 10px;
+  transform: translateY(0);
+}
+
+.cuc-news-card-copy {
+  width: 100%;
+}
+
+.cuc-news-card-footer {
+  margin-top: 24px;
+  font-weight: 800;
+}
+
+.cuc-news-card-underline {
+  display: block;
+  width: 40px;
+  height: 4.8px;
+  margin-top: 4px;
+  background-color: #0050a0;
+}
+
+@media screen and (max-width: 991px) {
+  .cuc-news-section-first {
+    padding-top: 140px;
+  }
+
+  .cuc-news-section {
+    padding: 80px 0;
+  }
+
+  .cuc-news-header {
+    grid-template-columns: 1fr;
+  }
+
+  .cuc-news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cuc-news-card-title {
+    font-size: 20px;
+  }
+
+  .cuc-news-card-date {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cuc-news-title-big {
+    font-size: 32px;
+  }
+
+  .cuc-news-intro {
+    font-size: 16px;
+  }
+
+  .cuc-news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cuc-news-card-excerpt {
+    font-size: 14px;
+  }
+}
+
+@media (hover: none) {
+  .cuc-news-card-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .cuc-news-card-body {
+    position: static;
+    min-height: auto;
+    transform: none;
+  }
+
+  .cuc-news-card-excerpt {
+    opacity: 1;
+    max-height: none;
+    margin-top: 10px;
+    transform: none;
+  }
+}

@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://expert.cuc.edu.cn/Main/LeftMenuT.do -->
+<html class="os-windows screen-desktop-wide device-desktop"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+	数字媒体中心审核工作台
+</title>
+    <!--顶部通用mata标签代码 -->
+    <!-- 头部meta公共代码 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta http-equiv="Cache-Control" content="no-transform"><meta name="Description" content="东方博冠（北京）科技有限公司专注于数字校园、智慧校园、网上阅卷、教育云服务、校园一卡通、数字图书馆软件的研发、应用及推广！"><meta name="Keywords" content="教育信息化,数字校园,智慧校园,网上阅卷,教育云服务,校园一卡通,数字图书馆"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="robots" content="noarchive"><meta name="referrer" content="always"><meta name="format-detection" content="telephone=no">
+<!--顶部基本js头部-->
+<!--核心头部js和方法-->
+<link type="text/css" href="https://expert.cuc.edu.cn/zui-1.10.0-dist/dist/css/zui.min.css?v=20260415" rel="stylesheet">
+<link type="text/css" href="https://expert.cuc.edu.cn/select2-4.0.3/dist/css/select2.min.css?v=20251103" rel="stylesheet">
+<link type="text/css" href="https://expert.cuc.edu.cn/zui-1.10.0-dist/dist/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="/audit-expert/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="/audit-expert/zui.min.js"></script>
+<script type="text/javascript" src="/audit-expert/bootbox.js"></script>
+<script type="text/javascript" src="/audit-expert/datetimepicker.min.js"></script>
+<script type="text/javascript" src="/audit-expert/laytpl.js"></script>
+<script type="text/javascript" src="/audit-expert/select2.min.js"></script>
+<script type="text/javascript" src="/audit-expert/zh-CN.js"></script>
+<script type="text/javascript" src="/audit-expert/date.js"></script>
+<script type="text/javascript" src="/audit-expert/select2tree.js"></script>
+<script type="text/javascript" src="/audit-expert/jquery.cookie.js"></script>
+    <script type="text/javascript">
+        var PageNameInfo = "LeftMenuT.aspx";
+        var RootPath = "/";//page页面根路经
+        localStorage.setItem("CachRootPath", RootPath);//缓存根目录
+        var pageStyleType = "1";//首页版本：1简洁版（默认），2青春版，3透明版； 
+        var IsRealEnvironmentFlag = "1";//是否真实运行环境 0是测试，1是正式
+        var SchoolCode = "2031";
+        // 判断是在移动端还是在手机端(前置使用)
+        var isMoble = isMobileHandle();
+        if (isMoble) {
+            document.write('<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />');
+        }
+
+        //检查是否为移动端（ipad排除外）
+        function isMobileHandle() {
+            var userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
+            var isMobileWidth = window.innerWidth < 768;//宽度兜底（768px 为界）
+            var result = /android|webos|iphone|ipad|ipod|blackberry|windows phone|iemobile|0pera mini|harmonyos/i.test(userAgent) || isMobileWidth;
+            if (SchoolCode == "2025") {//清华大学单独处理
+                // 排除 iPad、Android 平板（屏幕尺寸较大的）
+                var isTablet = /ipad|android(?!.*mobile)/i.test(userAgent) || (userAgent.includes('android') && window.innerWidth >= 768);
+                // 只将手机设备判定为移动端
+                var isPhone = /iphone|android.*mobile/i.test(userAgent);
+                result = isPhone && !isTablet
+            }
+            return result;
+        }
+
+        //======检测是否需要使用移动端 ：0 否 1是 --start
+        function fnCheckAllowMobile(ts, TokenKey) {
+            $.ajax({
+                url: '../Common/CheckAllowMobile.do?ts=' + ts + '&TokenKey=' + TokenKey,
+                data: {},
+                type: "GET",
+                dataType: "json",
+                success: function (rs) {
+                    var IsAllowMobile = $._session.set("CacheIsAllowMobile", rs.ObjParams);
+                    if (rs.success == "y") {
+                        if (rs.ObjParams == '1') {
+                            if (isMoble) {
+                                window.location.href = "/Pages/Main/SmartLeftMenuT.do";
+                            }
+                        }
+                    }
+                },
+                error: function (e) { }
+            });
+        }
+        $(function () {
+            var IsAllowMobile = $._session.get("CacheIsAllowMobile");
+            if (IsAllowMobile) {
+                if (IsAllowMobile == '1') {
+                    if (isMoble) {
+                        window.location.href = "/Pages/Main/SmartLeftMenuT.do";
+                    }
+                }
+            } else {
+                fnCheckAllowMobile('38','')
+            }
+            //首页菜单加样式
+            if ($("#iframe").attr("src").includes("MainHome.do")) {
+                $("#nav_list > li:first").addClass("open")
+            } else {
+                $("#nav_list > li:first").removeClass("open")
+            }  
+        })
+        //======检测是否需要使用移动端 ：0 否 1是 --end
+         
+    </script>
+    <link type="text/css" href="/audit-expert/ace.min.css" rel="stylesheet">
+    
+    
+    <link type="text/css" href="/audit-expert/global.css" rel="stylesheet">
+    <link type="text/css" href="/audit-expert/iconfont.css" rel="stylesheet">
+    <link type="text/css" href="/audit-expert/LeftMenuT.css" rel="stylesheet">
+    <link type="text/css" href="/audit-expert/WZJStyle.css" rel="stylesheet">
+    <style id="audit-arg-overrides">
+      .nav-list .arrow1, .nav-list b.arrow, .nav-list .icon-xiala { display: none !important; }
+      .nav-list li.active > a:after, .nav-list li.active > a:before,
+      .nav-list > li > a:after, .nav-list > li > a:before,
+      .nav-list .submenu li.active > a:after { display: none !important; content: none !important; border: none !important; }
+      .g-userinfo .dropdownList { display: none !important; }
+    
+      /* ── ARG 布局修复：防止元素乱飞 ── */
+      .main-container:after { display: none !important; content: none !important; }
+      .main-container { position: relative !important; top: 70px !important; padding-bottom: 32px !important; height: auto !important; }
+      .navbar.CafaHeaderNav { margin-bottom: 0 !important; min-height: 70px !important; }
+      .navbar .container-fluid { min-height: 70px; }
+      .navbar .container-fluid::after { content: ""; display: block; clear: both; }
+      .shemiTipsBox {
+        background: none !important;
+        text-indent: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        margin-left: 40px !important;
+        float: left !important;
+        color: #d9534f !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        line-height: 70px !important;
+        letter-spacing: 1px !important;
+      }
+      .sidebar.menu-min { float: left !important; width: 43px !important; height: auto !important; }
+      .main-content { margin-left: 43px !important; float: none !important; }
+      .breadcrumbs { clear: both !important; position: relative !important; top: auto !important; }
+      #iframe { display: block !important; min-height: 400px !important; height: auto !important; }
+      .footerInfo { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 900 !important; }
+      .footerInfo ul { text-align: center !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+      .footerInfo li { display: inline-block !important; margin: 0 5px !important; color: red !important; font-size: 12px !important; line-height: 30px !important; }
+    </style>
+    
+    <script type="text/javascript">
+        var LeftMenuFlag = 0;// 0 首页  其它：个人资料提交 
+        var IsShowDropDownMenu = 1; //头像是否显示下拉菜单 0：不显示 ， 1：显示 
+        var showEn='0';
+        var UserTypeInfo = 4;//角色 1教师，2学生
+        var IdCardInfo = "";//身份证号
+
+    </script>
+    <script type="text/javascript" src="/audit-expert/ace-extra.min.js"></script>
+    <script type="text/javascript" src="/audit-expert/ace.min.js"></script>
+    <script type="text/javascript" src="/audit-expert/jquery.nicescroll.js"></script>
+    <link type="text/css" href="https://expert.cuc.edu.cn/Plug-in/Validform/css/tablefrom.css" rel="stylesheet">
+<link type="text/css" href="https://expert.cuc.edu.cn/Plug-in/Validform/css/style.css" rel="stylesheet">
+<script type="text/javascript" src="/audit-expert/Validform_v5.3.1_min_zh-cn.js"></script>
+<script type="text/javascript" src="/audit-expert/Validform_Datatype_zh-cn.js"></script>
+<script type="text/javascript" src="/audit-expert/datatype_zh-cn.js"></script>
+    
+    <!--顶部全局Js文件引入（需要修改版本号的common.js）-->
+    
+<script type="text/javascript" src="/audit-expert/md5.js"></script>
+
+    <!-- 页面LeftMenuTjs -->
+    
+    <!--修改密码弹出层js-->
+    <script type="text/javascript" src="/audit-expert/JsEncryptHelper.js"></script>
+    <script type="text/javascript" src="/audit-expert/StaffResetPwd.js"></script>
+
+    <link type="text/css" href="https://expert.cuc.edu.cn/Plug-in/autocompleter/css/myAutoCompleter.css?v=20201213" rel="stylesheet">
+<script type="text/javascript" src="/audit-expert/jquery.autocompleter.js"></script>
+    <style type="text/css">
+        .passEditBox {
+            width: 475px;
+        }
+
+        .rightSubTips2007 {
+            font-weight: bold;
+            color: red;
+        }
+        #ascrail2000-hr {
+           opacity:0!important
+        }
+    </style>
+
+
+</head>
+
+<body class="Body-2031">
+    <!--暂存学校编号-->
+    <input type="hidden" value="2031" id="SchoolCodeVlue" autocomplete="off">
+    <!--暂存是否是老师还是学生  1 是老师其它是学生-->
+    <input type="hidden" value="2" id="UserTypeVlue" autocomplete="off">
+    <form method="post" action="https://expert.cuc.edu.cn/pages/Main/LeftMenuT.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMTcwNTEzMjEwDxYGHgpTY2hvb2xDb2RlBQQyMDMxHghVc2VyVHlwZQICHg1Qcm9kdWN0TmFtZUVuBR5Gb3JlaWduIEFmZmFpcnMgU2VydmljZSBTeXN0ZW0WAgIBD2QWAgIBD2QWAmYPDxYCHgRUZXh0BQwwMTAtNTgyMzU1MjlkZGRwLMuQ0HL5IuRMSRYFRF22AW5YPn6x5s4dOJehZYXmzQ==" autocomplete="off">
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6A25DE81" autocomplete="off">
+</div>
+        <!-- 导航头部开始 -->
+        <nav class="navbar navbar-default CafaHeaderNav" role="navigation">
+
+            <div class="container-fluid">
+
+                
+<style type="text/css">
+    /*左上角logo样式*/
+    .navbar-header {
+        padding: 0;
+    }
+
+    .navbar-brand {
+        min-height: 70px;
+        padding: 0 15px;
+    }
+
+        .navbar-brand .logo {
+            height: 60px;
+            border: none;
+            padding: 0;
+            margin-top: 5px;
+        }
+
+    .logo-name {
+        border-left: 1px solid #ccc;
+        padding: 5px 20px;
+        margin-top: 9px;
+        height: auto;
+        margin-right: 20px;
+    }
+
+    .logo-name-boderRt {
+        border-right: 1px solid #ccc;
+    }
+    /*中文*/
+    #ProductName {
+        letter-spacing: 5.8px;
+        font-size: 20px;
+        line-height: 26px;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        color: red;
+        text-align: center;
+    }
+    /*英文*/
+    #ProductNameEn {
+        font-size: 12px;
+        letter-spacing: 1.2px;
+        font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        color: red;
+    }
+    /*北京交通大学*/
+    .navbar-header2003 #ProductName {
+        letter-spacing: 9px;
+    }
+
+    .navbar-header2003 #ProductNameEn {
+        letter-spacing: 0.1px;
+        text-align: left;
+    }
+    /*南京大学*/
+    .navbar-header2052 #ProductName {
+        letter-spacing: 11.2px;
+        text-align: left;
+    }
+
+    .navbar-header2052 #ProductNameEn {
+        letter-spacing: 0;
+        text-align: left;
+    }
+    /*成都中医药*/
+    /*北京交通大学*/
+    .navbar-header2207 #ProductName {
+        letter-spacing: 9.3px;
+    }
+
+    .navbar-header2207 #ProductNameEn {
+        letter-spacing: 0px;
+        text-align: left;
+    }
+   .navbar-header2076 #ProductName {
+      letter-spacing: normal;
+        line-height: 26px!important;
+   
+    }
+     .navbar-header2076 .logo-name-boderRt{
+            
+                line-height: 36px;
+        
+        margin-top: 19px;
+        
+        overflow: hidden;
+        
+        height: 36px;
+        
+        border-right:none
+        
+        }
+    .shemiTipsBox {
+        background: url("../images/shemiBak.png?v=20241219") no-repeat left center / 100%;
+        height: 70px;
+        width: 122px;
+        float: left;
+        margin-left: 100px;
+        text-indent: -9999px;
+    }
+    /*2012石油华东*/
+    .shemiTipsBox2012 {
+        background: url("../images/shemiBak2012.png?v=20241219") no-repeat left center / 100%;
+        height: 70px;
+        width: 535px;
+        float: left;
+        margin-left: 90px;
+        text-indent: -9999px;
+    }
+    /*西安理工*/
+    .shemiTipsBox2188 {
+     background: url("../images/shemiBak2188.png?v=20250512") no-repeat left center / 100%;
+        height: 70px;
+        width: 279px;
+        float: left;
+        margin-left: 50px;
+        text-indent: -9999px;
+    }
+    /*2084哈尔*/
+    .shemiTipsBox2084 {
+        background: url("../images/shemiBak2084.png?v=20241219") no-repeat left center / 100%;
+        height: 70px;
+        width: 581px;
+        float: left;
+        margin-left: 42px;
+        text-indent: -9999px;
+    }
+
+    @media screen and (max-width: 1445px) {
+        .shemiTipsBox2012 {
+            width: 423px;
+            margin-left: 30px;
+        }
+
+        .shemiTipsBox2084 {
+            width: 423px;
+            margin-left: 30px;
+        }
+    }
+
+    @media screen and (max-width: 1030px) {
+        .shemiTipsBox2012 {
+            width: 268px;
+            margin-left: -1px;
+        }
+
+        .shemiTipsBox2084 {
+            width: 268px;
+            margin-left: -1px;
+        }
+
+        .g-userinfo {
+            margin-right: 0px;
+        }
+
+            .g-userinfo > li {
+                margin-right: 15px;
+            }
+    }
+</style>
+
+
+<div class="navbar-header LeftFloat  hidden-xs navbar-header2031">
+    <a class="navbar-brand" href="https://expert.cuc.edu.cn/Main/LeftMenuT.do#" id="leftTopLogo"><img src="/audit-expert/logo.png" class="logo"></a>
+    <ul class="logo-name logo-name-boderRt" id="logo-name">
+        <li id="ProductName">数字媒体中心审核工作台</li>
+        <li id="ProductNameEn">Digital Media Center Audit Workbench</li>
+    </ul>
+    
+    <div class="shemiTipsBox">上网不涉密，涉密不上网</div>
+
+    
+</div>
+
+
+<script type="text/javascript">
+    var SchoolCode = "2031";
+    $(function () {
+        //最左上角的地方去掉英文字后居中处理
+        var $ProductName = $("#ProductName");
+        var $ProductNameEn = $("#ProductNameEn");
+        if (!($ProductNameEn.text())) {
+            $ProductNameEn.css("display", "none");
+            $ProductName.css("line-height", "44px");
+        }
+        var $leftTopLogo = $("#leftTopLogo");
+        if (PageNameInfo == "EEDepot.aspx") {
+            var specialScrollArr = ["2025", "2085", "2188", "2207"];
+            var loginPathJson = {
+                "2025": "/images/MainHome2025/logo.png?v='",
+                "2085": "/attachment/private/logo2085.png?v=",
+                "2188": "/attachment/private/logo2188.png?v=",
+                "2207": "/attachment/private/logo2207.png?v=",
+                "default": "/attachment/private/logo.png?v="
+            }
+            var LogoPath = loginPathJson.default;
+            if (specialScrollArr.indexOf(SchoolCode) != -1) {
+                LogoPath = loginPathJson[SchoolCode]
+            }
+        } else if (PageNameInfo == "LeftMenuT.aspx") {
+            var LogoPath = "/attachment/private/logo.png?v=";
+            if (SchoolCode == "2025") {//清华Logo
+                LogoPath = "/images/MainHome2025/logo.png?v='"
+            }
+            else if (SchoolCode == "2188") {//西安理工
+                LogoPath = "/attachment/private/logo2188.png?v='"
+            }
+            else if (SchoolCode == "2207") {//成都中医药logo
+                LogoPath = "/attachment/private/logo2207.png?v='"
+            } else if (SchoolCode == "2041") {//成都中医药logo
+                LogoPath = "/attachment/private/logo2041.png?v='"
+            }
+}
+        $leftTopLogo.html('<img src="/audit-expert/logo.png" class="logo">');
+    })
+</script>
+
+                <ul class="g-userinfo RightFloat">
+                    <li class="li01 g-userinfo-dropdown">
+                        <i class="iconfont iconyonghu"></i>
+                        <a href="javascript:void(0)">
+                            临时审核员
+                            
+                            <span class="iconfont iconarrowDown03" style="display: inline-block"></span>
+                        </a>
+
+                        
+                        <ul class="dropdownList">
+                            <li><a href="javascript:void(0)" onclick="fnJumpLeftMenu(&#39;0211&#39;,&#39;MyDetails.do&#39;)">我的个人资料</a></li>
+
+                            
+                            <li><a href="javascript:void(0)" onclick="fnJumpLeftMenu(&#39;0211&#39;,&#39;ResetPwdStep.do&#39;)">密码修改</a></li>
+                            
+                        </ul>
+                           
+                         
+                    </li>
+                    <li class="li02"><i class="iconfont iconpower-full"></i>
+                        
+                        <a href="https://expert.cuc.edu.cn/Main/Logout.do">退出系统</a>
+                        
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+        
+        <!-- 内容部分开始 -->
+        <div class="main-container" id="main-container">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('main-container', 'fixed')
+                } catch (e) { }
+            </script>
+            <div class="main-container-inner">
+                <a class="menu-toggler" id="menu-toggler" href="https://expert.cuc.edu.cn/Main/LeftMenuT.do#">
+                    <span class="menu-text"></span>
+                </a>
+                <div class="sidebar menu-min" id="sidebar">
+                    <script type="text/javascript">
+                        try {
+                            ace.settings.check('sidebar', 'fixed')
+                        } catch (e) { }
+                    </script>
+                    <!-- #sidebar-shortcuts -->
+                    <div id="menu_style" class="menu_style" tabindex="5000" style="overflow: hidden; outline: none;">
+                        <ul class="nav nav-list" id="nav_list">
+                            <li data-offtop="40" class="open">
+                                <a href="https://expert.cuc.edu.cn/Main/LeftMenuT.do" id="firstHome" class="iframeurl" title="首页/Home">
+                                    <i class="iconfont icon-shouye"></i>
+                                    <span class="menu-text">首页</span>
+                                </a>
+                            </li>
+                            
+                            <li class="" data-fncode="0205" data-offtop="80">
+                                <a href="javascript:void(0)" data-fncode="0205" data-url="../Main/LeftMenuT.do?functionCode=0205" class="dropdown-toggle" title="学生因公出国（境）管理">
+                                    <i class="iconfont icon-xuesheng"></i>
+                                    <span class="menu-text">学生因公出国（境）管理</span>
+                                    <b class="arrow1 iconfont icon-xiala"></b>
+                                </a>
+                                <ul class="submenu" id="Sort_link_0" style="">
+                                    
+                                    <li class="home ">
+                                        <a id="inner_0" href="javascript:void(0)" name="../StudentExchange_2031/NewProjectList.do?ts=38&amp;userToken=EEFF953BF6F058C2B37876F5F839AF17&amp;functioncode=0205" title="项目管理" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>项目管理</a>
+                                    </li>
+                                    
+                                    <li class="home ">
+                                        <a id="inner_1" href="javascript:void(0)" name="../StudentExchange_2031/NewApplyList.do?applyTypeValue=1&amp;ts=38&amp;userToken=EEFF953BF6F058C2B37876F5F839AF17&amp;functioncode=0205" title="项目状态查询" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>项目状态查询</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li class="" data-fncode="0219" data-offtop="120">
+                                <a href="javascript:void(0)" data-fncode="0219" data-url="../Main/LeftMenuT.do?functionCode=0219" class="dropdown-toggle" title="模板下载">
+                                    <i class="iconfont icon-xiazai"></i>
+                                    <span class="menu-text">模板下载</span>
+                                    <b class="arrow1 iconfont icon-xiala"></b>
+                                </a>
+                                <ul class="submenu" id="Sort_link_1">
+                                    
+                                    <li class="home ">
+                                        <a id="inner_0" href="javascript:void(0)" name="../EModelFile/ModelFileList.do?ts=38&amp;userToken=EEFF953BF6F058C2B37876F5F839AF17&amp;functioncode=0219" title="模板文件管理" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>模板文件管理</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li class="" data-fncode="0225" data-offtop="160">
+                                <a href="javascript:void(0)" data-fncode="0225" data-url="../Main/LeftMenuT.do?functionCode=0225" class="dropdown-toggle" title="外事动态">
+                                    <i class="iconfont icon-daiban"></i>
+                                    <span class="menu-text">外事动态</span>
+                                    <b class="arrow1 iconfont icon-xiala"></b>
+                                </a>
+                                <ul class="submenu" id="Sort_link_2">
+                                    
+                                    <li class="home ">
+                                        <a id="inner_0" href="javascript:void(0)" name="../NoticeManager/NoticeList.do?ts=38&amp;userToken=EEFF953BF6F058C2B37876F5F839AF17&amp;functioncode=0225" title="通知公告查询" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>通知公告查询</a>
+                                    </li>
+                                    
+                                    <li class="home ">
+                                        <a id="inner_1" href="javascript:void(0)" name="../NoticeManager/WeChartNoticeList.do?ts=38&amp;userToken=EEFF953BF6F058C2B37876F5F839AF17&amp;functioncode=0225" title="微信公告查询" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>微信公告查询</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li class="" data-fncode="0211" data-offtop="200">
+                                <a href="javascript:void(0)" data-fncode="0211" data-url="../Main/LeftMenuT.do?functionCode=0211" class="dropdown-toggle" title="个人中心">
+                                    <i class="iconfont icon-xitong"></i>
+                                    <span class="menu-text">个人中心</span>
+                                    <b class="arrow1 iconfont icon-xiala"></b>
+                                </a>
+                                <ul class="submenu" id="Sort_link_3">
+                                    
+                                    <li class="home ">
+                                        <a id="inner_0" href="javascript:void(0)" name="../StudentAbroad/MyDetails.do?functioncode=0211" title="我的个人资料" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>我的个人资料</a>
+                                    </li>
+                                    
+                                    <li class="home ">
+                                        <a id="inner_1" href="javascript:void(0)" name="../StudentExchange/ResetPwdStep.do?functioncode=0211" title="密码修改" class="iframeurl">
+                                            <i class="iconfont icon-youkuohao"></i>密码修改</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                        </ul>
+
+
+                    </div>
+
+                    <div class="sidebar-collapse" id="sidebar-collapse">
+                        <i class="iconfont icon-youkuohao" data-icon1="iconfont icon-cebianlan" data-icon2="iconfont icon-youkuohao"></i>
+                    </div>
+                    <script type="text/javascript">
+                        try {
+                            ace.settings.check('sidebar', 'collapsed')
+                        } catch (e) { }
+                    </script>
+                </div>
+
+                <div class="main-content" id="iframeContent">
+                    <script type="text/javascript">
+                        try {
+                            ace.settings.check('breadcrumbs', 'fixed')
+                        } catch (e) { }
+                    </script>
+                    <div class="breadcrumbs" id="breadcrumbs">
+                        <ul class="breadcrumbs_ul breadcrumb" id="breadcrumbList"><li><i class="iconfont icon-zhuye"></i><a href="https://expert.cuc.edu.cn/Main/LeftMenuT.do">首页</a></li></ul>
+
+                        <a class="rightSubTips " style="float: right; cursor: pointer;" id="shuaxin">刷新当前界面</a>
+                        <div class="rightSubTips   jiamiTips" style="float: right; margin-right: 15px; padding: 10px 0; font-size: 14px; line-height: 1.5;">请勿上传涉密材料</div>
+                         
+                    </div>
+
+                    
+                    <iframe id="iframe" onload="myframe.initIframeHeight()" style="border:0;width:100%;background:#fff;" name="iframe" frameborder="0" src="/audit/dashboard?embed=1"></iframe>
+                    
+                    <!-- /.page-content -->
+                </div>
+                <!-- /.main-content -->
+            </div>
+            <!-- /.main-container-inner -->
+        </div>
+
+        <!-- 版权部分 footerInfo-->
+        
+
+   <footer class="footerInfo  hidden-xs">
+            <ul>
+                <li>推荐使用谷歌浏览器,360浏览器极速模式登录</li>
+                
+                  <li>技术支持&nbsp;QQ：1516849328 1075477985&nbsp;电话：<span id="FooterInfo_BATelephone1">010-58235529</span></li>
+                  <li>维护：东方博冠（北京）科技有限公司</li>
+                 
+                <li>版本号：3.0.1.0919</li>
+                
+                <li>备案号：<span id="FooterInfo_BACode1"></span></li>
+            </ul>
+        </footer>
+
+<style type="text/css">
+    
+.footerInfo {
+    width: 100%;
+    overflow: hidden;
+    background: #f8f8f8;
+    box-shadow: 0px -2px 5px #ccc;
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    left: 0;
+    color: #999
+}
+
+.footerInfo ul {
+    text-align: center;
+    margin: 0
+}
+
+.footerInfo li {
+    display: inline-block;
+    margin: 0 5px;
+    color: red;
+    font-size: 12px;
+    line-height: 30px
+}
+
+.footerInfo li a {
+    color: red
+}
+
+</style>
+
+    </form>
+
+    
+    <div class="container-filud" id="passEditPop">
+        <div class="passEditBox" id="passEditBox">
+            <div class="passEditBox-tit">修改密码/Change your password</div>
+            <form id="baseInfoForm" role="form" method="post" action="https://expert.cuc.edu.cn/SystemManager/SaveStaffPwdForModel.do">
+                
+                <div class="form-group" style="height: 121px;">
+                    <label for="newPwd" class="required">输入新密码/Enter new password</label>
+                    <input type="password" autocomplete="off" class="form-control" maxlength="50" datatype="*8-30" errormsg="密码设置过于简单 You need a stronger password!" id="newPwd" name="newPwd" nullmsg="请输入新密码 Please enter your new passwords" placeholder="请输入新密码 Please enter your new passwords" oninput="CheckPasswordSecurity(this)" onblur="return pwdCompareCheck(this)">
+                    <div class="tipsStrength pubFlex">
+                        <div id="password-grade1"><span>弱/Weak</span></div>
+                        <div id="password-grade2"><span>中/Mid</span></div>
+                        <div id="password-grade3"><span>强/Strong</span></div>
+                    </div>
+                <span class="Validform_checktip"></span></div>
+                <div class="form-group">
+                    <label for="repeatNewPwd" class="required">新密码确认/Enter the password again</label>
+                    <input type="password" autocomplete="off" class="form-control" maxlength="50" datatype="*" recheck="newPwd" errormsg="两次输入账号密码不一致： Please enter the same passwords as the first time!" id="repeatNewPwd" name="repeatNewPwd" nullmsg="请新密码确认Enter the password again" placeholder="新密码确认Enter the password again">
+                <span class="Validform_checktip"></span></div>
+                <button class="btn btn-primary btnConfirm" type="button" onclick="toNextPage()">确认 Confirm</button>
+                
+            </form>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        //======密码修改相关-start
+        function toNextPage() {
+            $("#baseInfoForm").submit();
+        }
+        $(function () {
+            $("#baseInfoForm").Validform({
+                tiptype: 3,
+                label: ".required",
+                ajaxPost: true,
+                postonce: true,
+                beforeSubmit: function () {
+                    var a = $("#newPwd").val();
+                    var reg = /^[0-9]{6,30}$|^[a-z]{6,30}$|^[A-Z]{6,30}$|^[!@#$%^&*()_-]{6,30}$/; //全是数字或全是字母 6-30个字符
+                    if (a.match(reg)) {
+                        return false;
+                    }
+                    // 验证表单
+                    fnVerificationPwd($("#newPwd"));
+
+                    //将新密码加密
+                    var password = $('#newPwd').val();
+                    var data = {};
+                    data.psd = password.trim("");
+
+                    var result = $.encryptRequest({
+                        data: data
+                    });
+                    password = result.psd;
+                    document.getElementById("newPwd").value = password;
+                    document.getElementById("repeatNewPwd").value = password;
+                },
+                callback: function (data) {
+                    if (data.success == "y") {
+                        //bootbox.alert({
+                        //    message: "通过信息验证 Verified! 保存成功 Saved！", size: 'small', callback: function () {
+                        //        location.reload();
+                        //    }
+                        //});
+                        bootbox.dialog({ 
+                            message: '<p style="font-size:16px;padding:20px">保存成功 Saved！</p>',
+                            onEscape: true,
+                            backdrop: true,
+                            buttons: {
+                                fee: {
+                                    label: '确认 Confirm',
+                                    className: 'btn-primary',
+                                    callback: function(){
+                                        location.reload();
+                                    }
+                                }
+                  
+                            }
+                        })
+                    } else {
+
+                        bootbox.alert({ message: data.msg, size: 'small' });
+                    }
+                }
+            });
+            var pwdflag = '0'
+            //修改密码弹出层显示
+            if (pwdflag == "1") {
+                //if (pwdflag != "1") {
+                $("#passEditPop").addClass("passEditPopShow");
+                $("body").addClass("modal-EditPwd");
+            }
+
+        })
+        //======密码修改相关-end
+
+    </script>
+
+
+
+    <!--======服务助手======start-->
+    
+<style type="text/css">
+    .myAizhushou-modaltit {
+       padding-left:29px;
+       height:32px;
+       background:url("../images/eelogos.png") no-repeat left top 2px / 21px;
+    }
+</style>   
+ <div id="kefuBox">
+        <div id="kefuTable">
+                <div class="main_head">服务助手</div>
+            <div class="info">
+                <ul class="qqtable">
+                      <!--北科大有自己的外事助手-->
+                        
+                    <li class="help"><a href="javascript:void(0)" onclick="fnServerHJump(1)" title="用户手册"><i class="iconfont iconiconserverh03"></i>用户手册</a></li>
+                    
+                    <li class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&amp;uin=1486836356&amp;site=qq&amp;menu=yes" title="QQ在线"><i class="iconfont iconqq1"></i>QQ在线</a> </li>
+                      <li class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&amp;uin=1516849328&amp;site=qq&amp;menu=yes" title="QQ在线"><i class="iconfont iconqq1"></i>QQ在线</a> </li>
+                      
+                    <li>
+                         
+                        <div class="qun"><font>技术支持电话</font><br><span>010-58235529</span></div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="Obtn" id="kefuBtn">
+        </div>
+    </div>
+    
+    <div class="modal fade" id="myUseHelpModel">
+        <div class="modal-dialog modal-lg" style="margin-top: 112px; width: 680px;">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                     <div data-dismiss="modal" style="float:right;background:none!important;border:none;font-size: 16px;"><i class="icon icon-times"></i>关闭</div>
+                    <h4 class="modal-title"><strong>用户操作手册</strong></h4>
+                </div>
+                <div class="modal-body" style="max-height: initial; overflow: visible; min-height: 180px;font-size:16px;line-height:1.8;">
+                    <div class="text-center" style="font-size: 16px; padding-top: 57px;">该模块尚未上传用户操作手册！</div>
+
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="icon icon-times"></i>关闭</button>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+            #myUseHelpModel .modal-body pre {
+              font-size:16px;line-height:1.8;border:none;background:none;
+            }
+             #myUseHelpModel .modal-body a {
+                color:#0a67fb
+            }
+        </style>
+    </div>
+     
+    <div class="modal fade" id="myModuleModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <div data-dismiss="modal" style="float:right;background:none!important;border:none;font-size: 16px;cursor:pointer"><i class="icon icon-times"></i>关闭</div>
+                    <h4 class="modal-title"><strong>模块列表</strong></h4>
+                </div>
+                <div class="modal-body" style="max-height: initial; overflow: visible; min-height: 180px">
+                    <div class="text-center case_con">
+                        <div class="row case_list" id="dataListContainer"></div>
+                         <script type="text/html" id="appTemplate">
+                   
+                            {{# for(var i = 0, len = d.DataList.length; i < len; i++){ }}
+                         
+                              <div class="col-xs-3">
+                                <a class="case_item bg{{i+1}}" href="javascript:;" data-functioncode="{{d.DataList[i].FunctionCode}}" title="{{d.DataList[i].FunctionName}}" onclick="fnOpernModuleHandler('{{d.DataList[i].FunctionCode}}','{{d.DataList[i].FunctionName}}','{{d.type}}')">
+                                    <div class="iconfontBox">
+                                            <i class="iconfont iconfont{{i+1}} {{d.DataList[i].IconName}}"></i>
+                                    </div>
+                                    <p class="xxmc">{{d.DataList[i].FunctionName}}</p>
+                                </a>
+                            </div>
+
+                            {{#} }}
+
+                        </script>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="icon icon-times"></i>关闭</button>
+                    <!--<button type="button" class="btn" data-dismiss="modal">取消</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+    <div class="modal fade" id="myLiuyanModel">
+        <div class="modal-dialog modal-lg" style="width:90vw; top:50%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <div data-dismiss="modal" class="close" style="float:right;background:none!important;border:none;font-size: 16px;cursor:pointer"><i class="icon icon-times"></i>关闭</div>
+                   
+                    <h4 class="modal-title"><strong>留言板</strong></h4>
+                </div>
+                <div class="modal-body" style="max-height: initial; overflow: visible; min-height: 180px">
+                    <div class="text-center">
+                         <iframe id="myLiuyanModelIframe" style="border: 0; width: 100%; background-color: #FFF; height:410px;overflow:scroll;overflow-x:hidden" name="myLiuyanModelIframe" frameborder="0" src="/audit-expert/saved_resource.html"></iframe>
+                         
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+    <div class="modal fade" id="myAizhushouModel">
+        <div class="modal-dialog modal-lg" style="width:90vw; height:100vh; ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div data-dismiss="modal" style="float:right;background:none!important;border:none;font-size: 16px;cursor:pointer"><i class="icon icon-times"></i>关闭</div>
+                    <h4 class="modal-title myAizhushou-modaltit"><strong>AI外事助手</strong></h4>
+                </div>
+                <div class="modal-body" style="max-height: initial; overflow: visible; min-height: 180px">
+                    <div class="text-center">
+                         <iframe id="myAizhushouModelIframe" style="border: 0; width: 100%; background-color: #FFF; height:86vh;overflow:scroll;overflow-x:hidden" name="myAizhushouModelIframe" frameborder="0" src="/audit-expert/saved_resource(1).html"></iframe>
+                         
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--======服务助手======end-->
+
+    <!--点击菜单 包含‘dialog’显示弹出框-->
+    <div id="myShowMenuModel" class="modal fade" style="display: none;">
+        <div class="modal-dialog" style="width: 700px; margin-top: 112px;">
+            <div class="modal-content" style="background: #fff">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal" style="position: absolute; right: 11px; top: 9px">×</a>
+                    <h3 style="margin: 0; font-size: 16px; font-weight: bold" id="myShowMenuTit"></h3>
+                </div>
+                <div class="modal-body" id="myShowMenuBody" style="max-height: 60vh; min-height: 310px; overflow-x: hidden; font-size: 16px; line-height: 1.5;">
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <a href="https://expert.cuc.edu.cn/Main/LeftMenuT.do#" class="btn btn-primary" data-dismiss="modal" style="background-color: #3280fc;"><span class="glyphicon glyphicon-remove-circle"></span>关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--东北师范 学生根据身份证号弹出提示语弹出框-->
+    <div id="ShowDaoYuModel" class="modal fade">
+        <div class="modal-dialog" style="width: 700px; margin-top: 150px;">
+            <div class="modal-content" style="background: #fff">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal" style="position: absolute; right: 11px; top: 9px">×</a>
+                    <h3 style="margin: 0; font-size: 16px; font-weight: bold">温馨提示</h3>
+                </div>
+                <div class="modal-body" style="min-height: 160px; overflow-x: hidden; font-size: 18px; line-height: 1.5; text-indent: 36px;">
+                    首次登录数字媒体中心审核工作台的申请人（学生），请先在左侧个人中心，我的个人资料中维护个人信息，完成填写后可在学生国境外留学管理模块中进行国境外交流项目查询和申请。
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <a href="https://expert.cuc.edu.cn/Main/LeftMenuT.do#" class="btn btn-primary" data-dismiss="modal" style="background-color: #3280fc;"><span class="glyphicon glyphicon-remove-circle"></span>关闭</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--吉林大学 维护信息弹窗-->
+    <style type="text/css">
+        #UserInfoModal .staffInfoTips {
+            padding: 15px 0 20px;
+            border-bottom: 1px solid #ccc;
+            margin: 0 20px 15px;
+            line-height: 2;
+            font-size: 16px;
+            color: #3280fc;
+        }
+
+            #UserInfoModal .staffInfoTips p {
+                text-indent: 29px;
+            }
+
+        #UserInfoModal .editForm-box {
+            padding: 0 15px;
+        }
+
+        #UserInfoModal .form-group {
+            min-height: 86px;
+        }
+        /*只读属性*/
+        #UserInfoModal .form-control[readonly] {
+            background: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            color: #92979e;
+        }
+    </style>
+    <div class="modal fade" id="UserInfoModal">
+        <div class="modal-dialog modal-lg" style="margin-top: 169px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                    <h4 class="modal-title">用户账号信息完善</h4>
+                </div>
+                <div class="modal-body">
+                   
+                    <!--SystemNanager/SaveStaffInfo.do-->
+                    <form id="UserInfoForm" class="editForm" role="form" method="post" action="https://expert.cuc.edu.cn/Main/LeftMenuT.do" style="overflow: hidden;">
+                        <input type="hidden" id="userCodeForEdit" name="userCodeForEdit" value="" autocomplete="off">
+                        <input type="hidden" id="userTokenForEdit" name="userTokenForEdit" value="" autocomplete="off">
+                        <div class="editForm-box row">
+                            <div class="col-xs-3 form-group">
+                                <label for="AgencyName">单位全称（中文）</label>
+                                <input type="text" autocomplete="off" class="form-control readonly" style="padding-left: 10px;" readonly="" maxlength="200" id="AgencyName" name="AgencyName" value="">
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="Name">姓名（中文）<span style="color: red">*</span></label>
+                                <input type="text" autocomplete="off" class="form-control" datatype="*" maxlength="200" id="Name" name="Name" value="">
+                            </div>
+
+                            <div class="col-xs-3 form-group">
+                                <label for="IDCardCode" class="required">身份证号<span style="color: red">*</span></label>
+                                <input type="text" autocomplete="off" class="form-control" maxlength="18" datatype="*" nullmsg="请填写身份证号" id="IDCardCode" name="IDCardCode" value="" errormsg="请填写正确身份证号！">
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="Mobile" class="required">移动电话<span style="color: red">*</span></label>
+                                <input type="text" autocomplete="off" class="form-control" datatype="Mobile" maxlength="11" id="Mobile" name="Mobile" value="" errormsg="请填写正确移动电话！">
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="LoginNetID" class="required">工号<span style="color: red">*</span></label>
+                                <input type="text" autocomplete="off" class="form-control" maxlength="20" id="LoginNetID" name="LoginNetID" value="">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" class="btn btn-primary" onclick="SaveUserLackInfo()"><i class="icon icon-save mg-l-5"></i>保存</button>
+                <button type="button" class="btn" data-dismiss="modal"><i class="icon icon-times mg-l-5"></i>关闭</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 关联学生账号 -->
+    <a id="RelatedInfoShow" data-toggle="modal" href="https://expert.cuc.edu.cn/Main/LeftMenuT.do#RelatedInfoModel"></a>
+    <div class="modal fade" id="RelatedInfoModel">
+        <div class="modal-dialog" style="width: 639px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+                    <h4 class="modal-title" style="font-weight: bold">请输入学生姓名或学号，选择后点击“确定”进行切换。</h4>
+                    <input type="hidden" id="R_Code" name="R_Code" value="" autocomplete="off">
+                    <input type="hidden" id="R_Token" name="R_Token" value="" autocomplete="off">
+                </div>
+                <div class="modal-body">
+                    <div class="collapse in clearfix">
+
+                        <div class="form-group" style="padding-top: 40px; padding-bottom: 40px; text-align: center;">
+                            <label for="R_StaffName" style="display: inline-block; font-weight: bold; font-size: 16px;">学生学号：</label>
+                            <div style="position: relative; display: inline-block; width: 356px;">
+                                <input type="text" class="form-control" id="R_StaffName" name="R_StaffName" placeholder="输入学号联想后进行选择" style="width: 100%; height: 40px; line-height: 40px; font-size: 16px;" autocomplete="off">
+                                <input type="hidden" id="R_StaffCode" name="R_StaffCode" value="" autocomplete="off">
+                                <input type="hidden" id="R_StaffToken" name="R_StaffToken" value="" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" class="btn btn-primary" onclick="changeStudentIdentity()" data-dismiss="modal"><i class="icon icon-check"></i>确定</button>
+                    <button type="button" class="btn btn-danger" id="btnCloseRelated" data-dismiss="modal"><i class="icon icon-times"></i>关闭</button>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+            #RelatedInfoModel .autocompleter {
+                top: 40px;
+                left: 0px;
+                right: 0px;
+            }
+        </style>
+    </div>
+
+
+
+
+<div id="ascrail2000" class="nicescroll-rails" style="width: 4px; z-index: auto; background: rgb(241, 241, 241); cursor: default; position: absolute; top: 70px; left: 38.3333px; height: 778px; display: none; opacity: 0.3;"><div style="position: relative; top: 0px; float: right; width: 4px; height: 778px; background-color: rgb(174, 174, 174); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background-clip: padding-box; border-radius: 4px;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails" style="height: 4px; z-index: auto; background: rgb(241, 241, 241); top: 844px; left: 0px; position: absolute; cursor: default; display: none; width: 42px; opacity: 0.3;"><div style="position: relative; top: 0px; height: 4px; width: 32px; background-color: rgb(174, 174, 174); border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background-clip: padding-box; border-radius: 4px; left: 0px;"></div></div>    <script src="/audit-expert/audit-bridge.js"></script>
+</body></html>

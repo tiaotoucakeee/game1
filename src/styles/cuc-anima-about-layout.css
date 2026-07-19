@@ -1,0 +1,420 @@
+/* 学院介绍页 — 克隆 introduction-zh.html */
+
+.cuc-about-layout {
+  margin-top: -96px;
+}
+
+.cuc-about-page {
+  position: relative;
+  color: #343a40;
+}
+
+.cuc-about-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.cuc-about-page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-about-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cuc-about-section-first {
+  padding: 200px 0 0;
+}
+
+.cuc-about-section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cuc-about-section-last {
+  padding: 100px 0;
+  margin-bottom: 100px;
+}
+
+.cuc-about-title-big {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-about-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-about-hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px 0 20px;
+  text-align: center;
+  position: relative;
+}
+
+.cuc-about-para {
+  margin: 0;
+  font-size: 18px;
+  line-height: 2;
+}
+
+.cuc-about-para + .cuc-about-para {
+  margin-top: 3.5em;
+}
+
+.cuc-about-para strong {
+  font-weight: 800;
+}
+
+.cuc-about-richtext p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 2;
+  font-weight: 500;
+}
+
+.cuc-about-richtext p + p {
+  margin-top: 2em;
+}
+
+.cuc-about-history-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px 16px;
+}
+
+.cuc-about-history-grid img {
+  display: block;
+  width: 100%;
+}
+
+/* 改革期 — 中轴时间线（对齐官网收获期样式） */
+.cuc-about-reform-timeline {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 24px auto 0;
+  padding: 12px 0 40px;
+}
+
+.cuc-about-reform-spine {
+  position: absolute;
+  left: 50%;
+  top: 88px;
+  bottom: 24px;
+  width: 2px;
+  background: #343a40;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.cuc-about-reform-title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 48px;
+  text-align: center;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: #343a40;
+  text-shadow: 3px 3px 0 rgba(200, 200, 200, 0.85);
+}
+
+.cuc-about-reform-events {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-about-reform-event {
+  margin-bottom: 72px;
+}
+
+.cuc-about-reform-event:last-child {
+  margin-bottom: 0;
+}
+
+.cuc-about-reform-branch {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+}
+
+.cuc-about-reform-event--right .cuc-about-reform-branch {
+  padding-left: 50%;
+}
+
+.cuc-about-reform-event--left .cuc-about-reform-branch {
+  padding-right: 50%;
+  flex-direction: row-reverse;
+}
+
+.cuc-about-reform-line {
+  flex: 1;
+  height: 2px;
+  background: #343a40;
+  min-width: 48px;
+  max-width: 320px;
+}
+
+.cuc-about-reform-year {
+  flex-shrink: 0;
+  padding: 0 12px;
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1;
+  color: #343a40;
+  letter-spacing: -0.02em;
+  text-shadow: 3px 3px 0 rgba(200, 200, 200, 0.85);
+}
+
+.cuc-about-reform-desc {
+  margin: 12px 0 0;
+  font-size: clamp(15px, 1.4vw, 19px);
+  font-weight: 600;
+  line-height: 1.7;
+  color: #da2128;
+}
+
+.cuc-about-reform-event--right .cuc-about-reform-desc {
+  padding-left: calc(50% + 8px);
+  padding-right: 12px;
+}
+
+.cuc-about-reform-event--left .cuc-about-reform-desc {
+  padding-right: calc(50% + 8px);
+  padding-left: 12px;
+}
+
+@media screen and (max-width: 767px) {
+  .cuc-about-reform-spine {
+    left: 24px;
+    transform: none;
+  }
+
+  .cuc-about-reform-event--right .cuc-about-reform-branch,
+  .cuc-about-reform-event--left .cuc-about-reform-branch {
+    padding-left: 48px;
+    padding-right: 0;
+    flex-direction: row;
+  }
+
+  .cuc-about-reform-line {
+    max-width: 48px;
+  }
+
+  .cuc-about-reform-event--right .cuc-about-reform-desc,
+  .cuc-about-reform-event--left .cuc-about-reform-desc {
+    padding-left: 48px;
+    padding-right: 0;
+  }
+
+  .cuc-about-reform-year {
+    font-size: 40px;
+  }
+}
+
+.cuc-about-center-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+}
+
+.cuc-about-data-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.cuc-about-data-item {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-about-data-value-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.cuc-about-data-value {
+  position: relative;
+  z-index: 1;
+  margin: 36px 20px;
+  color: #da2128;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.cuc-about-data-icon {
+  position: absolute;
+  z-index: 0;
+  width: 124px;
+  bottom: -40%;
+  left: 12%;
+}
+
+.cuc-about-data-label {
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+.cuc-about-data-label h4 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cuc-about-honor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 72px 100px;
+  margin-top: 16px;
+}
+
+.cuc-about-honor-grid img {
+  display: block;
+  width: 100%;
+}
+
+.cuc-about-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 36px;
+}
+
+.cuc-about-award-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cuc-about-award-card img {
+  z-index: -1;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.cuc-about-award-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.cuc-about-award-content h4 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cuc-about-award-content p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cuc-about-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 16px 24px;
+  color: #fff;
+  background: #da2128;
+  text-decoration: none;
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+
+.cuc-about-watch-btn:hover {
+  background: #a91117;
+}
+
+.cuc-about-watch-btn-inner {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.cuc-about-watch-btn img {
+  z-index: 1;
+  width: auto;
+  height: 14px;
+  margin-left: 8px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 991px) {
+  .cuc-about-section-first {
+    padding-top: 140px;
+  }
+
+  .cuc-about-section,
+  .cuc-about-section-last {
+    padding: 80px 0;
+  }
+
+  .cuc-about-data-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cuc-about-honor-grid {
+    gap: 40px 48px;
+  }
+
+  .cuc-about-awards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cuc-about-title-big {
+    font-size: 32px;
+  }
+
+  .cuc-about-title {
+    font-size: 28px;
+  }
+
+  .cuc-about-para,
+  .cuc-about-richtext p {
+    font-size: 16px;
+  }
+
+  .cuc-about-data-grid,
+  .cuc-about-honor-grid,
+  .cuc-about-awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cuc-about-award-card img {
+    height: 280px;
+  }
+}

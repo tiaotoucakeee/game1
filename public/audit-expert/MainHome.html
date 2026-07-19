@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://expert.cuc.edu.cn/Main/MainHome.do -->
+<html class="os-windows screen-desktop-wide device-desktop"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+
+</title>
+    <!--顶部通用mata标签代码 -->
+    <!-- 头部meta公共代码 -->
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><meta http-equiv="Cache-Control" content="no-transform"><meta name="Description" content="东方博冠（北京）科技有限公司专注于数字校园、智慧校园、网上阅卷、教育云服务、校园一卡通、数字图书馆软件的研发、应用及推广！"><meta name="Keywords" content="教育信息化,数字校园,智慧校园,网上阅卷,教育云服务,校园一卡通,数字图书馆"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="robots" content="noarchive"><meta name="referrer" content="always"><meta name="format-detection" content="telephone=no">
+    <script type="text/javascript">
+        var SchoolCodeInfoCheck = '2031';
+        var RootPath = "/";//page页面根路经
+        var messageShow = 0;
+        localStorage.setItem("CachRootPath", RootPath);//缓存根目录
+        var UserTypeInfo = 2;//角色 1教师，2学生
+        // 判断是在移动端还是在手机端(前置使用)
+        (function () {
+            var isMoble = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+            if (isMoble) {
+                document.write('<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />')
+            }
+        })();
+        //电子科技大学 学生登录后直接跳至学生海外模块 
+        if (SchoolCodeInfoCheck == "2076" && UserTypeInfo !== 1) {
+            window.location.href = "../StudentExchange_2076/ProjectCatagory.do?ts=131&userToken=549637FA44A9AD425B1204D9BC7080FB&functioncode=0205"
+        }
+
+    </script>
+    <!--顶部基本js头部-->
+    <!--核心头部js和方法-->
+<link type="text/css" href="https://expert.cuc.edu.cn/zui-1.10.0-dist/dist/css/zui.min.css?v=20260415" rel="stylesheet">
+<link type="text/css" href="https://expert.cuc.edu.cn/select2-4.0.3/dist/css/select2.min.css?v=20251103" rel="stylesheet">
+<link type="text/css" href="https://expert.cuc.edu.cn/zui-1.10.0-dist/dist/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="./jquery-3.6.1.min.js.下载"></script>
+<script type="text/javascript" src="./zui.min.js.下载"></script>
+<script type="text/javascript" src="./bootbox.js.下载"></script>
+<script type="text/javascript" src="./datetimepicker.min.js.下载"></script>
+<script type="text/javascript" src="./laytpl.js.下载"></script>
+<script type="text/javascript" src="./select2.min.js.下载"></script>
+<script type="text/javascript" src="./zh-CN.js.下载"></script>
+<script type="text/javascript" src="./date.js.下载"></script>
+<script type="text/javascript" src="./select2tree.js.下载"></script>
+<script type="text/javascript" src="./jquery.cookie.js.下载"></script>
+    <link type="text/css" href="https://expert.cuc.edu.cn/fonts/iconfont.css?v=20260504" rel="stylesheet">
+
+    <link type="text/css" href="./global(1).css" rel="stylesheet">
+    <!--顶部全局css文件引入（需要修改版本号的WZJStyle.css）-->
+    <link type="text/css" href="./iconfont.css" rel="stylesheet">
+<link href="./WZJStyle.css" rel="stylesheet">
+    <!--当前页面新式MainHome.css-->
+
+    
+    <link type="text/css" href="./MainHome.css" rel="stylesheet">
+    
+
+    <!--顶部全局Js文件引入（需要修改版本号的common.js）-->
+    <script type="text/javascript" src="./common.js.下载"></script>
+<script type="text/javascript" src="./md5.js.下载"></script>
+
+    <!-- 页面MainHome.js -->
+    <script type="text/javascript" src="./MainHome.js.下载"></script>
+    <script type="text/javascript">
+        $(function () {
+            checkBeforeEabroadHasTip();
+        });
+        function checkBeforeEabroadHasTip() {
+            $.ajax({
+                url: "../Main/CheckBeforeEabroadHasTip.do",
+                type: "POST",
+                data: null,
+                dataType: "JSON",
+                success: function (rs) {
+                    if (rs && rs.ExtInfo) {
+                        location = rs.ExtInfo;
+                    }
+                }
+            });
+        }
+    </script>
+
+    <style type="text/css">
+        .GongGaomenuBox {
+            text-align: right;
+        }
+
+            .GongGaomenuBox > a {
+                display: inline-block;
+                margin-left: 5px;
+                line-height: 40px;
+            }
+    </style>
+    </head>
+<body class="Body-2031">
+
+    <form method="post" action="https://expert.cuc.edu.cn/pages/Main/MainHome.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTExNjI2MDU1MzgPFgQeBWlzR2N5aB4JaWZUZWFjaGVyaGRkn+s7L+Sxn9ImIyPyYBXLXE0oburMezTWff5+6wIQV0Y=" autocomplete="off">
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="E5494517" autocomplete="off">
+</div>
+
+        <!--浏览器兼容提示弹出框（只有在ie9- 显示）-->
+        <!-- 浏览器兼容提示弹出框（ie）start-->
+<style>
+
+    /*===浏览器兼容提示弹出框（ie）===start*/
+    .browser-modal {
+        z-index: 999999;
+        display: none; }
+
+    .browser-modal .left {
+        float: left;
+        margin-left: 0;}
+
+    .browser-modal .modal-header {
+        min-height: inherit;
+        padding: 8px 15px;
+        background: #efefef;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px; }
+
+    .browser-modal .modal-content {
+        border-radius: 5px; }
+
+    .browser-modal .modal-dialog {
+        z-index: 9999;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -130px 0 0 -300px; }
+
+    .browser-modal .modal-header .close {
+        font-size: 32px;
+        color: #0a67fb;
+        opacity: .85; }
+
+    .browser-modal .icon-warning-sign {
+        color: red;
+        font-size: 79px;
+        margin-left: 10px; }
+
+    .browser-modal .modal-title {
+        font-size: 18px; }
+
+    .browser-modal .modal-body {
+        text-align: center;
+        padding: 50px 0 0px;
+        width: 476px;
+        margin: 0 auto; }
+
+    .browser-modal .modal-body .tips {
+        font-size: 18px;
+        text-align:justify; padding-left: 107px;
+    }
+
+    .browser-modal .downUrl {
+        padding:30px 0 78px 0;
+        text-align: center; }
+
+    .browser-modal .downUrl .btn {
+        background: #0a67fb !important;
+        color: #fff !important;
+        margin: 0 5px;
+        border: none; }
+
+    /*===浏览器兼容提示弹出框（ie）===end*/
+</style>
+<div id="browserModal" class="modal modal-trigger fade in browser-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" id="browserClose" onclick="handlerBrowserHide()">×</button>
+                <h4 class="modal-title">
+                    <span class="modal-title-name">重要提醒</span>
+                </h4>
+            </div>
+            <div class="modal-body" style="max-height: initial; overflow: visible;">
+                <div class="left"><i class="modal-icon icon-warning-sign"></i></div>
+                <div class="right">
+                    <div class="tips">建议您使用谷歌浏览器、360极速浏览器、火狐浏览器、Safari浏览器、Edge浏览器、IE10浏览器及以上版本等主流浏览器。</div>
+
+                </div>
+
+            </div>
+            <div class="downUrl">
+                <a href="https://www.google.cn/intl/zh-CN/chrome/" class="btn" target="_blank" rel="noopener noreferrer">谷歌下载地址</a>
+                <a href="https://browser.360.cn/ee/" class="btn" target="_blank" rel="noopener noreferrer">360极速下载地址</a>
+                <a href="http://www.firefox.com.cn/" class="btn" target="_blank" rel="noopener noreferrer">火狐下载地址</a>
+                <a href="http://www.downza.cn/soft/21559.html" class="btn" target="_blank" rel="noopener noreferrer">IE11下载地址</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade in" id="browserBackdrop" onclick="handlerBrowserHide()"></div>
+</div>
+<script>
+    // 获取IE版本函数
+    function isIEVersion() {
+        // 取得浏览器的userAgent字符串
+        var userAgent = navigator.userAgent;
+        // 判断是否为小于IE11的浏览器
+        var isLessIE11 = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1;
+        // 判断是否为IE的Edge浏览器
+        var isEdge = userAgent.indexOf('Edge') > -1 && !isLessIE11;
+        // 判断是否为IE11浏览器
+        var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf('rv:11.0') > -1;
+        if (isLessIE11) {
+            var IEReg = new RegExp('MSIE (\\d+\\.\\d+);');
+            // 正则表达式匹配浏览器的userAgent字符串中MSIE后的数字部分，，这一步不可省略！！！
+            IEReg.test(userAgent);
+            // 取正则表达式中第一个小括号里匹配到的值
+            var IEVersionNum = parseFloat(RegExp['$1']);
+            if (IEVersionNum === 7) {
+                // IE7
+                return 7
+            } else if (IEVersionNum === 8) {
+                // IE8
+                return 8
+            } else if (IEVersionNum === 9) {
+                // IE9
+                return 9
+            } else if (IEVersionNum === 10) {
+                // IE10
+                return 10
+            } else {
+                // IE版本<7
+                return 6
+            }
+        } else if (isEdge) {
+            // edge
+            return 'edge'
+        } else if (isIE11) {
+            // IE11
+            return 11
+        } else {
+            // 不是ie浏览器
+            return -1
+        }
+    }
+    //关闭提示弹出框
+    function handlerBrowserHide() {
+        var bModal = document.getElementById("browserModal");
+        bModal.style.display = 'none';
+    }
+    function judgeBrowser() {
+         if (isIEVersion() == 6 || isIEVersion() == 7 || isIEVersion() == 8 || isIEVersion() == 9) {//如果是在ie6,7,8,9 就把提示框 显示出来
+            var bModal = document.getElementById("browserModal");
+            bModal.style.display = 'block';
+         }
+
+    }
+    judgeBrowser();
+
+</script>
+<!-- 浏览器兼容提示弹出框（ie）end-->
+        <div class="container-filud">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <!--左边菜单-->
+                    
+                    <div class="widget" id="mainHomeList_01">
+                        
+                        <div class="widget-header bordered-bottom bordered-info ">
+                            <span class="widget-caption" data-title="出入境管理事务">
+                                <i class="icon icon-th-list mg-r-5"></i>
+                                <span class="KeyFname">出入境管理事务</span>
+                            </span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="collapse in">
+                                <div class="cards">
+                                    
+                                    <div class="col-md-4  col-xs-6">
+                                        <a class="card clearfix mainHomeLink_01" href="javascript:;" data-functioncode="0205" data-title="学生因公出国（境）管理" onclick="fnJumpListPage(this,&#39;../Main/LeftMenuT.do?functionCode=0205&#39;)">
+                                            <div class="iconfontBox">
+                                                <i class="iconfont icon-xuesheng"></i>
+                                            </div>
+                                            <div class="cardContent">
+                                                <span>
+
+                                                    
+                                                    
+                                                    学生因公出国（境）管理
+
+                                                    
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <!--综合事务start-->
+                    
+                    <!--综合事务end-->
+
+
+
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    
+                    
+
+                    <!--  通知公告  只有本校学生 和老师可以看到 -->
+                    
+                    <div class="mainHomeRightTab widget">
+                        
+                        <div class="widget-header bordered-bottom bordered-info RightTitle" style="min-height: 44px">
+                            <div class="LeftFloat widget-caption"><i class="icon icon-volume-up mg-r-5"></i><span id="Notice">通知公告</span></div>
+                            <div class="RightFloat GongGaomenuBox mg-r-10">
+                                
+                                <a href="javascript:void(0)" onclick="fnJumpWeixin(this,{name:&#39;../NoticeManager/NoticeList.do&#39;,fnCode:&#39;0225&#39;})" class="MainHomeRightMore">更多</a>
+
+                            </div>
+                        </div>
+                        <div class="tab-content widget-body">
+                            <!-- 通知公告-->
+                            
+  <link type="text/css" href="./HomeNoticeList.css" rel="stylesheet">
+
+                            <div class="tab-pane fade active in SchoolInfoDefault" id="tabNotice">                                  <div class="list-group noticeBox">                                                                           <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20250009&amp;token=7a52b3dab88d4698a66c&amp;functionCode=0225&#39;" title="中国传媒大学学生因公出国（境）学生操作手册">                                         <div class="pull-left announcementBox">                                                                                                                                                                                      <span class="redColor title LeftFloat ">中国传媒大学学生因公出国（境）学生操作手册</span>                                                                                                                                      </div>                                         <div class="pull-right">2025-09-30</div>                                     </a>                                                                          <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20250005&amp;token=bf61e3c851074898877c&amp;functionCode=0225&#39;" title="中国传媒大学因公出国（境）管理办法">                                         <div class="pull-left announcementBox">                                                                                                                                                                                      <span class="redColor title LeftFloat ">中国传媒大学因公出国（境）管理办法</span>                                                                                                                                      </div>                                         <div class="pull-right">2025-04-01</div>                                     </a>                                                                          <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20260002&amp;token=0d8b9701ed8c410bb4f2&amp;functionCode=0225&#39;" title="中国传媒大学2026年秋季学期学生出国（境）交流项目报名工作的通知">                                         <div class="pull-left announcementBox">                                                                                                                                                                                      <span class="title LeftFloat ">中国传媒大学2026年秋季学期学生出国（境）交流项目报名工作的通知</span>                                                                                                                                     </div>                                         <div class="pull-right">2026-03-05</div>                                     </a>                                                                          <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20250011&amp;token=6c66535fdf75419bb8ea&amp;functionCode=0225&#39;" title="中国传媒大学学生因公出国（境）管理系统审批流程图">                                         <div class="pull-left announcementBox">                                                                                                                                                                                      <span class="title LeftFloat ">中国传媒大学学生因公出国（境）管理系统审批流程图</span>                                                                                                                                     </div>                                         <div class="pull-right">2025-12-29</div>                                     </a>                                                                          <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20250001&amp;token=f82a969cef234a2eb8c7&amp;functionCode=0225&#39;" title="2026年春季学期学生出国（境）交流项目报名通知">                                         <div class="pull-left announcementBox">                                                                                                                                         <span class="infoPublic LeftFloat">[信息公开]</span>                                                                                                                                         <span class="redColor title LeftFloat ">2026年春季学期学生出国（境）交流项目报名通知</span>                                                                                                                                      </div>                                         <div class="pull-right">2025-09-16</div>                                     </a>                                                                          <a class="list-group-item clearfix" href="javascript:void(0)" onclick="javascript:location=&#39;../NoticeManager/ShowNoticeInfo.do?applyCode=1100002031NOTICE20250004&amp;token=69a43035ca614956be3d&amp;functionCode=0225&#39;" title="学生因公（出国境）交流常见问题">                                         <div class="pull-left announcementBox">                                                                                                                                                                                      <span class="redColor title LeftFloat ">学生因公（出国境）交流常见问题</span>                                                                                                                                      </div>                                         <div class="pull-right">2025-09-16</div>                                     </a>                                                                     </div>                                                         </div>
+                            <script type="text/html" id="tabNoticeTemplate">
+                                 <div class="list-group noticeBox">
+                                    {{# for(var i=0, len=d.DataList.length; i < len; i++) { }} 
+                                    <a 
+                                        class="list-group-item clearfix" 
+                                        href="javascript:void(0)" 
+                                         
+                                         onclick="javascript:location='../NoticeManager/ShowNoticeInfo.do?applyCode={{d.DataList[i].Code}}&token={{d.DataList[i].TokenKey}}&functionCode=0225'"
+                                         
+                                        title="{{d.DataList[i].Title}}">
+                                        <div class="pull-left announcementBox">
+                                            {{#  
+                                                var fnIsSecret = function(){
+                                                 if(d.DataList[i].IsSecret){
+                                                    return "ShowTips";
+                                                   }else{
+                                                    return ""
+                                                  } 
+                                                }
+                                           }}
+                                            {{#if(d.DataList[i].IsDataPublic == 1){}}
+                                              <span  class="infoPublic LeftFloat">[信息公开]</span>
+                                            {{#} }}
+                                              {{#if(d.DataList[i].IsRemind){}}
+                                            <span  class="redColor title LeftFloat {{fnIsSecret()}}">{{htmlUtil.htmlEncode(d.DataList[i].Title)}}</span>
+                                            {{#}else{ }}
+                                            <span class="title LeftFloat {{fnIsSecret()}}">{{htmlUtil.htmlEncode(d.DataList[i].Title)}}</span>
+                                           {{#} }}
+
+                                              {{#if(d.DataList[i].IsSecret){}}
+                                            <span class="tips"><i class="icon icon-ban-circle"></i>不公开</span>
+                                             {{#} }}
+                                        </div>
+                                        <div class="pull-right">{{ d.DataList[i].strNewsDate }}</div>
+                                    </a>
+                                   {{#}}}
+                                </div>                            
+                            </script>
+                            <script type="text/javascript">
+                            
+                                $(function () {
+                                    fnGetNoticeData()
+                                })
+
+
+
+
+                                //获取通知公告列表数据
+                                function fnGetNoticeData() {
+                                    $.ajax({
+                                        url: '../Common/GetNoticeList.do?v=' + Math.random(),
+                                        data: {  ts: "131", TokenKey: "549637FA44A9AD425B1204D9BC7080FB" },
+                                        type: "POST",
+                                        dataType: "json",
+                                        success: function (result) {
+                                            var list = [];
+                                            if (result.ObjParams && result.ObjParams.length > 0) {
+                                                var list = result.ObjParams;
+                                                var resultData = {
+                                                    DataList: list
+                                                };
+                                                var gettpl = document.getElementById("tabNoticeTemplate").innerHTML;
+                                                laytpl(gettpl).render(resultData, function (html) {
+                                                    $("#tabNotice").html(html);
+
+                                                });
+                                            }
+
+
+                                        },
+                                        error: function (e) {
+
+                                        }
+                                    });
+                                }
+                            </script>
+
+
+                        </div>
+                    </div>
+                    
+                    <!--综合事务start-->
+                    
+                    <div class="widget" id="rightMainHomeList_01">
+                        <div class="widget-header bordered-bottom bordered-info RightTitle">
+                            <span class="widget-caption"><i class="icon icon-th-list mg-r-5"></i><span>综合事务</span></span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="collapse in">
+                                <div class="cards">
+                                    
+                                    <div class="col-md-6  col-xs-6">
+                                        <a class="card clearfix" href="javascript:void(0)" data-functioncode="0219" onclick="fnJumpListPage(this,&#39;../Main/LeftMenuT.do?functionCode=0219&#39;)">
+                                            <div class="iconfontBox">
+                                                <i class="iconfont icon-xiazai"></i>
+                                            </div>
+                                            <div class="cardContent"><span>模板下载</span></div>
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="widget" id="rightMainHomeList_02">
+                        <div class="widget-header bordered-bottom bordered-info RightTitle">
+                            <span class="widget-caption"><i class="icon icon-th-list mg-r-5"></i><span>基础模块</span></span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="collapse in">
+                                <div class="cards">
+                                    
+                                    <div class="col-md-6  col-xs-6">
+                                        <a class="card clearfix" href="javascript:void(0)" data-functioncode="0211" onclick="fnJumpListPage(this,&#39;../Main/LeftMenuT.do?functionCode=0211&#39;)">
+                                            <div class="iconfontBox">
+                                                <i class="iconfont icon-xitong"></i>
+                                            </div>
+                                            <div class="cardContent"><span>个人中心</span></div>
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--综合事务end-->
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+
+
+
+
+
+</body></html>

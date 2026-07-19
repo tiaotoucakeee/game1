@@ -1,0 +1,162 @@
+/* 新闻详情页 — 克隆 news-2/aniwow2024-huo-jiang-ming-dan.html */
+
+.cuc-news-article-page {
+  position: relative;
+  color: #343a40;
+}
+
+.cuc-news-article-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.cuc-news-article-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-news-article-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cuc-news-article-hero {
+  padding: 120px 0 0;
+}
+
+.cuc-news-article-hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 16px;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.cuc-news-article-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 180px;
+  margin-right: 60px;
+}
+
+.cuc-news-article-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-news-article-date {
+  color: #717171;
+  margin: 16px 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cuc-news-article-hero-img {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  max-height: 720px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.cuc-news-article-body {
+  padding: 100px 0 120px;
+}
+
+.cuc-news-article-richtext p {
+  margin: 0 0 16px;
+  font-size: 18px;
+  line-height: 2;
+  font-weight: 500;
+}
+
+.cuc-news-article-table-wrap {
+  overflow-x: auto;
+  margin: 24px 0 32px;
+}
+
+.cuc-news-article-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.cuc-news-article-table th,
+.cuc-news-article-table td {
+  border: 1px solid #000;
+  font-size: 18px;
+  line-height: 1.4;
+  text-align: center;
+  height: 60px;
+  padding: 8px 16px;
+  vertical-align: middle;
+}
+
+.cuc-news-article-footer {
+  margin-top: 32px;
+}
+
+.cuc-news-article-footer p {
+  margin: 0 0 16px;
+  font-size: 18px;
+  line-height: 2;
+  text-align: right;
+}
+
+@media (max-width: 991px) {
+  .cuc-news-article-hero {
+    padding-top: 100px;
+  }
+
+  .cuc-news-article-hero-grid {
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+  }
+
+  .cuc-news-article-title-wrap {
+    margin-right: 0;
+  }
+
+  .cuc-news-article-hero-img {
+    height: 52vh;
+    max-height: 420px;
+  }
+
+  .cuc-news-article-body {
+    padding: 60px 0 80px;
+  }
+
+  .cuc-news-article-richtext p,
+  .cuc-news-article-footer p {
+    font-size: 16px;
+  }
+
+  .cuc-news-article-table th,
+  .cuc-news-article-table td {
+    font-size: 16px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cuc-news-article-title {
+    font-size: 24px;
+  }
+
+  .cuc-news-article-hero-img {
+    height: 40vh;
+    max-height: 320px;
+  }
+}

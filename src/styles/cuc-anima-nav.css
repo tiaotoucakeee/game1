@@ -1,0 +1,169 @@
+/* 动画学院官网导航 */
+
+.cuc-anima-nav.navigation {
+  --cuc-nav-height: 96px;
+  z-index: 1000;
+  position: fixed;
+  inset: 0 0 auto 0;
+}
+
+.cuc-anima-nav .navbar {
+  background-color: #fff;
+  position: relative;
+  border-bottom: 1px solid #eceef2;
+}
+
+.cuc-anima-nav .nav-warpper {
+  justify-content: space-between;
+  align-items: center;
+  min-height: var(--cuc-nav-height);
+  padding: 18px 0;
+  display: flex;
+}
+
+.cuc-anima-nav .nav-left {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.cuc-anima-nav .nav-right {
+  align-items: center;
+  gap: 22px;
+  display: flex;
+}
+
+.cuc-anima-nav .nav-logo {
+  max-width: 84px;
+  width: 84px;
+  height: auto;
+}
+
+.cuc-anima-nav .nav-list {
+  padding-left: 28px;
+  list-style-type: none;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+.cuc-anima-nav .nav-link {
+  color: #343a40;
+  text-align: left;
+  text-transform: capitalize;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 28px 6px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  position: relative;
+}
+
+.cuc-anima-nav .nav-link-text {
+  white-space: nowrap;
+}
+
+.cuc-anima-nav .nav-link-underline {
+  display: block;
+  width: 18px;
+  height: 3px;
+  transform-origin: left center;
+  background-color: #0050a0;
+  margin-top: 6px;
+  transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cuc-anima-nav .nav-link:hover .nav-link-underline,
+.cuc-anima-nav .nav-link:focus-visible .nav-link-underline {
+  width: 100%;
+}
+
+.cuc-anima-nav .nav-search-trigger {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #0050a0;
+  color: #fff;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.cuc-anima-nav .nav-search-trigger:hover {
+  background: #004080;
+  box-shadow: 0 4px 12px rgba(0, 80, 160, 0.28);
+}
+
+.cuc-anima-nav .nav-search-trigger:active {
+  transform: scale(0.96);
+}
+
+.cuc-anima-nav .nav-search-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.cuc-anima-nav .nav-action-link {
+  color: #343a40;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 6px 0;
+  transition: color 0.2s ease;
+}
+
+.cuc-anima-nav .nav-action-link:hover {
+  color: #0050a0;
+}
+
+@media screen and (max-width: 991px) {
+  .cuc-anima-nav .nav-warpper {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cuc-anima-nav .nav-left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .cuc-anima-nav .nav-list {
+    flex-wrap: wrap;
+  }
+
+  .cuc-anima-nav .nav-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .cuc-anima-nav .nav-link {
+    padding: 8px 18px 4px;
+    font-size: 15px;
+  }
+
+  .cuc-anima-nav .nav-action-link {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cuc-anima-nav .nav-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cuc-anima-nav .nav-link-underline {
+    transition: none;
+  }
+}
