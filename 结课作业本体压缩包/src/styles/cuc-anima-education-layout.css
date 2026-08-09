@@ -1,0 +1,314 @@
+/* 本科生教育 / 专业介绍 — 克隆 programmes-zh.html */
+
+.cuc-edu-layout {
+  margin-top: -96px;
+}
+
+.cuc-edu-page {
+  position: relative;
+  color: #343a40;
+}
+
+.cuc-edu-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.cuc-edu-page-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cuc-edu-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cuc-edu-section-first {
+  padding: 200px 0 0;
+}
+
+.cuc-edu-section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cuc-edu-section-last {
+  padding: 100px 0 120px;
+}
+
+.cuc-edu-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.cuc-edu-title-big {
+  margin: 0 0 16px;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-edu-intro {
+  margin: 0;
+  min-width: 180px;
+  font-size: 18px;
+  line-height: 1.75;
+  font-weight: 400;
+  white-space: pre-line;
+}
+
+.cuc-edu-section-title-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.cuc-edu-section-title-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cuc-edu-section-logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 4px;
+}
+
+.cuc-edu-section-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-edu-major-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cuc-edu-major-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #b7b7b7;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cuc-edu-major-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.cuc-edu-card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+}
+
+.cuc-edu-card-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #343a40;
+}
+
+.cuc-edu-major-link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #343a40;
+  text-decoration: none;
+  border: none;
+  background: none;
+  transition: color 0.2s ease;
+}
+
+.cuc-edu-major-link:hover,
+.cuc-edu-major-link:focus-visible {
+  color: #da2128;
+}
+
+.cuc-edu-major-link-arrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.cuc-edu-grad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.cuc-edu-grad-grid.doctor {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 40px;
+}
+
+.cuc-edu-grad-card {
+  width: 100%;
+  color: #343a40;
+  background: #fff;
+  border: 1px solid #b7b7b7;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.cuc-edu-grad-card h4 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-transform: capitalize;
+}
+
+.cuc-edu-grad-item {
+  padding: 12px 0;
+  font-size: 16px;
+  line-height: 1.45;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cuc-edu-grad-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cuc-edu-arg-block {
+  margin-top: 40px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #b7b7b7;
+  border-radius: 4px;
+}
+
+.cuc-edu-arg-block h3 {
+  margin: 0 0 16px;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.cuc-edu-arg-block p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.cuc-edu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.cuc-edu-table th,
+.cuc-edu-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ececec;
+}
+
+.cuc-edu-table thead tr {
+  background: #f8f9fa;
+}
+
+.cuc-edu-table-note {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.cuc-edu-ai-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.cuc-edu-ai-link:hover {
+  color: #da2128;
+}
+
+@media (min-width: 768px) {
+  .cuc-edu-section-logo {
+    position: absolute;
+    left: -72px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-bottom: 0;
+  }
+
+  .cuc-edu-section-title-inner {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 991px) {
+  .cuc-edu-header {
+    grid-template-columns: 1fr;
+  }
+
+  .cuc-edu-major-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cuc-edu-grad-grid,
+  .cuc-edu-grad-grid.doctor {
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cuc-edu-section-first {
+    padding-top: 160px;
+  }
+
+  .cuc-edu-section,
+  .cuc-edu-section-last {
+    padding: 60px 0;
+  }
+
+  .cuc-edu-title-big {
+    font-size: 32px;
+  }
+
+  .cuc-edu-section-title {
+    font-size: 28px;
+  }
+}

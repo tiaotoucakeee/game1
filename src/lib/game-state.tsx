@@ -144,6 +144,8 @@ function readStoredState(): GameState {
 }
 
 interface GameContextValue extends GameState {
+  /** True after localStorage has been read on the client. */
+  ready: boolean;
   addClue: (id: ClueId) => void;
   hasClue: (id: ClueId) => boolean;
   setAuditLoggedIn: (v: boolean) => void;
@@ -168,7 +170,7 @@ interface GameContextValue extends GameState {
 const GameContext = createContext<GameContextValue | null>(null);
 
 export function GameProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState<GameState>(readStoredState);
+  const [state, setState] = useState<GameState>(defaultState);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -259,6 +261,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   const value: GameContextValue = {
     ...state,
+    ready,
     addClue,
     hasClue,
     setAuditLoggedIn: (v) =>
@@ -355,6 +358,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     },
     verification,
   };
+
+  if (!ready) {
+    return null;
+  }
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }

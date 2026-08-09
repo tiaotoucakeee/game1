@@ -1,0 +1,154 @@
+/* 领域成果页布局 — 独立 CSS，避免 Tailwind 任意值未编译导致样式不生效 */
+
+.cuc-fields-layout {
+  /* 抵消 anima/layout.tsx 的 pt-[96px]，由本页自行控制顶距 */
+  margin-top: -96px;
+}
+
+.cuc-fields-title-section {
+  position: relative;
+  z-index: 1;
+  padding: 200px 20px 0;
+}
+
+.cuc-fields-body-section {
+  position: relative;
+  z-index: 1;
+  min-height: 90vh;
+  padding: 60px 20px 96px;
+}
+
+.cuc-fields-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cuc-fields-heading {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.cuc-fields-filters {
+  margin-bottom: 88px;
+}
+
+.cuc-fields-filter-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.cuc-fields-filter-label {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.cuc-fields-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cuc-fields-filter-pill {
+  cursor: pointer;
+  border: 1px solid #bbb;
+  border-radius: 9999px;
+  background: #f2f2f2;
+  padding: 8px 16px;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cuc-fields-filter-pill.is-active {
+  border-color: #da2128;
+  background: #da2128;
+  color: #fff;
+}
+
+.cuc-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.cuc-fields-card {
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #fff;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(52, 58, 64, 0.24);
+}
+
+.cuc-fields-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+}
+
+.cuc-fields-card-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cuc-fields-card-tags {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cuc-fields-tag {
+  margin-top: 8px;
+  margin-left: 8px;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.cuc-fields-tag-audience {
+  background: rgba(218, 33, 40, 0.8);
+}
+
+.cuc-fields-tag-type {
+  background: rgba(15, 39, 102, 0.8);
+}
+
+@media screen and (min-width: 480px) {
+  .cuc-fields-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cuc-fields-filter-row {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .cuc-fields-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .cuc-fields-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

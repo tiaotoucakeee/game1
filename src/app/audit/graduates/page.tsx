@@ -6,6 +6,7 @@ import { GraduatePaperFloat } from "@/components/audit/GraduatePaperFloat";
 import { AuditTerminalBootOverlay } from "@/components/audit/AuditTerminalBootOverlay";
 import { GRADUATES, type GraduateRecord } from "@/data/game";
 import { useGame } from "@/lib/game-state";
+import { isMacOS } from "@/lib/platform";
 import type { GraduateVerifyStatus } from "@/types/game";
 
 type VerifyStatus = GraduateVerifyStatus;
@@ -145,6 +146,11 @@ function GraduatesContent() {
   } = useGame();
   const [bootOverlay, setBootOverlay] = useState(false);
   const bootTriggeredRef = useRef(false);
+  const [macLayout, setMacLayout] = useState(false);
+
+  useEffect(() => {
+    setMacLayout(isMacOS());
+  }, []);
 
   const verifyMap = graduateVerifyMap;
   const chengYeMarkedError = verifyMap[CHENG_YE_STUDENT_ID] === "error";
@@ -178,9 +184,11 @@ function GraduatesContent() {
   }, [setAuditTerminalUnlocked]);
 
   return (
-    <div className="container-filud audit-embed-page audit-graduates-page">
+    <div
+      className={`container-filud audit-embed-page audit-graduates-page${macLayout ? " audit-graduates-page--mac" : ""}`}
+    >
       {bootOverlay ? <AuditTerminalBootOverlay onComplete={handleBootComplete} /> : null}
-      <GraduatePaperFloat />
+      <GraduatePaperFloat macLayout={macLayout} />
       <div className="audit-graduates-layout">
         <div className="widget audit-graduates-table-panel">
           <div className="widget-header bordered-bottom bordered-info">

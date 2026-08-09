@@ -1,0 +1,342 @@
+/* 审核工作台登录 — 复刻 CUC SSO */
+
+.audit-sso-page {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  font-family: "PingFang SC", "Microsoft YaHei UI", sans-serif;
+  color: #fff;
+}
+
+.audit-sso-bg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: background-image 0.6s ease;
+}
+
+.audit-sso-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 88px 16px 72px;
+  box-sizing: border-box;
+}
+
+.audit-sso-lang {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 5;
+  display: flex;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.audit-sso-lang button {
+  width: 67px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-size: 14px;
+  line-height: 34px;
+}
+
+.audit-sso-lang button.is-active {
+  background: rgba(150, 37, 20, 0.58);
+}
+
+.audit-sso-shell {
+  width: 665px;
+  max-width: 100%;
+}
+
+.audit-sso-card {
+  display: flex;
+  width: 100%;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.audit-sso-panel-left {
+  flex: 1 1 404px;
+  min-width: 0;
+  padding: 48px 38px 25px;
+  background: rgba(68, 68, 68, 0.8);
+}
+
+.audit-sso-panel-right {
+  position: relative;
+  flex: 0 0 261px;
+  min-height: 460px;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.audit-sso-logo-row {
+  display: block;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  margin-bottom: 20px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.audit-sso-logo-img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 70px;
+  width: auto;
+  max-width: min(100%, 320px);
+  max-height: 70px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.audit-sso-logo-title {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.audit-sso-tabs {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.audit-sso-tab {
+  padding: 0 0 10px;
+  border: none;
+  background: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+}
+
+.audit-sso-tab.is-active {
+  color: #fff;
+  border-bottom: 3px solid #fff;
+}
+
+.audit-sso-tab.is-disabled {
+  color: rgba(255, 255, 255, 0.35);
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.audit-sso-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 12px;
+  height: 52px;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.audit-sso-field img {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.45;
+}
+
+.audit-sso-field input {
+  flex: 1;
+  min-width: 0;
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+}
+
+.audit-sso-field input:disabled {
+  color: #999;
+}
+
+.audit-sso-remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.audit-sso-remember input {
+  width: 15px;
+  height: 15px;
+}
+
+.audit-sso-remember img {
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+}
+
+.audit-sso-error {
+  min-height: 20px;
+  margin-top: 10px;
+  color: #ffb4b4;
+  font-size: 13px;
+  text-align: left;
+}
+
+.audit-sso-submit {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-top: 48px;
+  border: none;
+  border-radius: 4px;
+  background: #962514;
+  box-shadow: 0 0 7px rgba(11, 0, 10, 0.2);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.audit-sso-submit:hover {
+  background: #7f1f11;
+}
+
+.audit-sso-help {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.audit-sso-warning {
+  margin-top: 56px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: left;
+  color: #ffe566;
+}
+
+.audit-sso-qr-box {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  transform: translateX(-50%);
+  padding: 8px;
+  background: #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.audit-sso-qr-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.audit-sso-qr-label {
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+
+.audit-sso-carousel {
+  position: fixed;
+  bottom: 56px;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  gap: 30px;
+  transform: translateX(-50%);
+}
+
+.audit-sso-carousel button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.audit-sso-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  padding: 2px 0;
+  background: rgba(138, 138, 137, 0.4);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+
+.audit-sso-code-note {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.audit-sso-back-home {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 5;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.audit-sso-back-home:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 720px) {
+  .audit-sso-card {
+    flex-direction: column;
+  }
+
+  .audit-sso-panel-left,
+  .audit-sso-panel-right {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .audit-sso-panel-right {
+    min-height: 320px;
+  }
+}

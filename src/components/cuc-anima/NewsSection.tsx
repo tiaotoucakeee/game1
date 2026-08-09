@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { GameLink } from "@/components/game/GameLink";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -82,9 +82,9 @@ function NewsCard({
   }
 
   return (
-    <Link href={href} className="home-news-card mx-2.5 block">
+    <GameLink href={href} className="home-news-card mx-2.5 block">
       {inner}
-    </Link>
+    </GameLink>
   );
 }
 

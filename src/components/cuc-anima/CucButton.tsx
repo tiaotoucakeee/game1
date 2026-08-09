@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { GameLink } from "@/components/game/GameLink";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -61,8 +61,8 @@ export function CucButton({
   }
 
   return (
-    <Link href={href} className={classes}>
+    <GameLink href={href} className={classes}>
       {content}
-    </Link>
+    </GameLink>
   );
 }

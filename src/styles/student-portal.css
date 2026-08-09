@@ -92,8 +92,60 @@
   padding: 0;
 }
 
-.student-portal__user:hover {
+.student-portal__user:hover,
+.student-portal__user.is-open {
   color: #2f7fd3;
+}
+
+.student-portal__user-menu {
+  position: relative;
+}
+
+.student-portal__user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  min-width: 132px;
+  padding: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.student-portal__user-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #333;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.student-portal__user-dropdown-item:hover {
+  background: #f3f6fa;
+  color: #2f7fd3;
+}
+
+.student-portal--cya .student-portal__user-dropdown {
+  border-color: rgba(74, 222, 128, 0.22);
+  background: #111827;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.student-portal--cya .student-portal__user-dropdown-item {
+  color: #e5e7eb;
+}
+
+.student-portal--cya .student-portal__user-dropdown-item:hover {
+  background: rgba(74, 222, 128, 0.1);
+  color: #86efac;
 }
 
 .student-portal__avatar {
@@ -774,7 +826,8 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: transparent;
+  background: #f7f6f2;
+  overflow: hidden;
   cursor: pointer;
   filter: drop-shadow(0 8px 18px rgba(15, 23, 42, 0.22));
   transition: transform 0.2s ease, filter 0.2s ease;
@@ -787,9 +840,8 @@
 
 .student-portal__ani-fab-img {
   display: block;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -800,7 +852,7 @@
   left: 0;
   bottom: 0;
   z-index: 50;
-  width: min(100vw, 480px);
+  width: min(100vw, 580px);
   display: flex;
   flex-direction: column;
   background: #161b22;
@@ -809,6 +861,7 @@
   box-shadow: 8px 0 32px rgba(15, 23, 42, 0.22);
   transform: translateX(-105%);
   transition: transform 0.28s ease;
+  font-size: 15px;
 }
 
 .student-portal__ani-chat.is-open {
@@ -820,7 +873,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 16px;
+  padding: 16px 20px;
   border-bottom: 1px solid #30363d;
   background: linear-gradient(180deg, #1b2330 0%, #161b22 100%);
 }
@@ -828,33 +881,34 @@
 .student-portal__ani-chat-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .student-portal__ani-chat-title strong {
   display: block;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .student-portal__ani-chat-title span {
   display: block;
-  margin-top: 2px;
-  font-size: 11px;
+  margin-top: 3px;
+  font-size: 13px;
   color: #8b949e;
 }
 
 .student-portal__ani-chat-avatar {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
   flex-shrink: 0;
+  background: #f7f6f2;
 }
 
 .student-portal__ani-chat-avatar.is-small {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
 }
 
 .student-portal__ani-chat-head-actions {
@@ -903,10 +957,10 @@
 .student-portal__ani-chat-messages {
   flex: 1;
   overflow: auto;
-  padding: 16px 14px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -923,25 +977,49 @@
   gap: 10px;
 }
 
+.student-portal__ani-chat-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-portal__ani-chat-intro-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #8b949e;
+}
+
 .student-portal__ani-chat-suggestions {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 8px;
-  padding-left: 36px;
+  gap: 10px;
+  padding-left: 42px;
   padding-right: 4px;
+}
+
+.student-portal__ani-chat-suggestions.is-intro {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.student-portal__ani-chat-suggestions.is-follow-up {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(139, 148, 158, 0.35);
 }
 
 .student-portal__ani-chat-suggestion {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: 1px solid #484f58;
   border-radius: 12px;
   background: #30363d;
   color: #f0f6fc;
   font: inherit;
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
   text-align: left;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
@@ -960,7 +1038,7 @@
 
 .student-portal__ani-chat-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: flex-start;
 }
 
@@ -969,11 +1047,11 @@
 }
 
 .student-portal__ani-chat-bubble {
-  max-width: calc(100% - 42px);
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  line-height: 1.65;
+  max-width: calc(100% - 48px);
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .student-portal__ani-chat-bubble p {
@@ -1010,20 +1088,20 @@
 
 .student-portal__ani-chat-error {
   margin: 0;
-  padding: 8px 14px;
-  font-size: 12px;
+  padding: 10px 18px;
+  font-size: 14px;
   color: #ff7b72;
 }
 
 .student-portal__ani-chat-unlock {
-  margin: 0 14px;
-  padding: 10px 12px;
+  margin: 0 18px;
+  padding: 12px 14px;
   border: 1px solid rgba(63, 185, 80, 0.35);
   border-radius: 8px;
   background: rgba(63, 185, 80, 0.08);
   color: #7dffb3;
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .student-portal__ani-chat-unlock a {
@@ -1031,7 +1109,7 @@
 }
 
 .student-portal__ani-chat-composer {
-  padding: 12px 14px 14px;
+  padding: 14px 18px 18px;
   border-top: 1px solid #30363d;
   background: #11161d;
 }
@@ -1043,10 +1121,10 @@
   border-radius: 10px;
   background: #21262d;
   color: #e6edf3;
-  padding: 10px 12px;
+  padding: 12px 14px;
   font: inherit;
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.6;
   outline: none;
 }
 
@@ -1065,8 +1143,8 @@
 .student-portal__ani-chat-btn {
   border: 1px solid #30363d;
   border-radius: 8px;
-  padding: 7px 14px;
-  font-size: 13px;
+  padding: 8px 16px;
+  font-size: 14px;
   cursor: pointer;
 }
 

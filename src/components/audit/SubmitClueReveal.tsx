@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { CLUE_LABELS, getBonusClueLabel } from "@/data/game";
+import { CLUE_LABELS, CLUE_SOURCES, getBonusClueLabel } from "@/data/game";
 import type { ClueId } from "@/types/game";
 
 const SPOILER_STORAGE_KEY = "cuc-arg-submit-spoilers";
@@ -127,7 +127,14 @@ export function SubmitClueContent({
     return (
       <span className="audit-submit-clue-text">
         {CLUE_LABELS[clueId]}
-        {spoilerReveal ? <span className="audit-submit-clue-spoiler-tag">已查看提示</span> : null}
+        {spoilerReveal ? (
+          <>
+            <span className="audit-submit-clue-spoiler-tag">已查看提示</span>
+            <span className="audit-submit-clue-source-hint">
+              {CLUE_SOURCES[clueId].page} · {CLUE_SOURCES[clueId].trigger}
+            </span>
+          </>
+        ) : null}
       </span>
     );
   }

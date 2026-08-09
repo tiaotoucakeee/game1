@@ -15,9 +15,8 @@ import {
   STROLL_ENCOURAGEMENT,
   STROLL_FINALE_MAIL_LINK_DELAY_MS,
   STROLL_FINALE_MAIL_LINK_LABEL,
-  STROLL_NEWS_INTRO_STOPS,
-  STROLL_SCROLL_INTRO_DISTANCE,
-  STROLL_SCROLL_INTRO_RATIO,
+  STROLL_NEWS_EXTENDED_MOUNT_MS,
+  STROLL_NEWS_IMAGES,
   STROLL_SCHOOL_NAME,
   STROLL_SCROLL_DURATION_MS,
   STROLL_SCROLL_SPEED_BOOST,
@@ -25,44 +24,96 @@ import {
 
 type StrollPhase = "scroll" | "encourage_hold" | "encourage_fade" | "credits" | "brand";
 
+type StrollLayoutCache = {
+  vh: number;
+  scrollTarget: number;
+  quotesTop: number;
+  newsEls: HTMLElement[];
+  newsTops: number[];
+  quoteEls: HTMLElement[];
+  quoteLayout: Array<{ top: number; height: number }>;
+  encourageTop: number;
+  encourageHeight: number;
+};
+
 function clamp01(value: number) {
   return Math.max(0, Math.min(1, value));
 }
 
-function easeInOutCubic(t: number) {
-  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
-}
-
-/** 开场慢滚：前段几乎停住，第一张图先展示清楚 */
+/** 匀速滚动，progress 0→1 线性映射 */
 function mapScrollProgress(t: number) {
-  const introT = STROLL_SCROLL_INTRO_RATIO;
-  const introD = STROLL_SCROLL_INTRO_DISTANCE;
-  if (t <= introT) {
-    return (t / introT) * introD;
+  return t;
+}
+
+function setNewsTileOpacity(el: HTMLElement, opacity: number) {
+  if (opacity <= 0.01) {
+    el.style.removeProperty("opacity");
+    el.classList.remove("is-revealed");
+    return;
   }
-  return introD + ((t - introT) / (1 - introT)) * (1 - introD);
+  el.style.opacity = String(opacity);
+  el.classList.add("is-revealed");
 }
 
-function layoutTop(el: HTMLElement, viewport: HTMLElement, scrollTop: number) {
-  const vr = viewport.getBoundingClientRect();
+function layoutTop(el: HTMLElement, track: HTMLElement) {
+  const tr = track.getBoundingClientRect();
   const er = el.getBoundingClientRect();
-  return er.top - vr.top + scrollTop;
+  return er.top - tr.top;
 }
 
-function getEncourageScrollTarget(viewport: HTMLElement, section: HTMLElement) {
+function measureStrollLayout(track: HTMLElement, viewport: HTMLElement): StrollLayoutCache {
   const vh = viewport.clientHeight;
-  const scrollTop = viewport.scrollTop;
-  const top = layoutTop(section, viewport, scrollTop);
-  return Math.max(0, top - (vh - section.offsetHeight) * 0.5);
+  const newsSection = track.querySelector<HTMLElement>("[data-stroll-news-section]");
+  const quotesSection = track.querySelector<HTMLElement>("[data-stroll-quotes-section]");
+  const encourageSection = track.querySelector<HTMLElement>("[data-stroll-encourage-section]");
+  const newsEls = Array.from(track.querySelectorAll<HTMLElement>("[data-stroll-news]"));
+  const quoteEls = Array.from(track.querySelectorAll<HTMLElement>("[data-stroll-quote]"));
+
+  const scrollTarget = encourageSection
+    ? Math.max(0, layoutTop(encourageSection, track) - (vh - encourageSection.offsetHeight) * 0.5)
+    : Math.max(0, track.offsetHeight - vh);
+
+  return {
+    vh,
+    scrollTarget,
+    quotesTop: quotesSection ? layoutTop(quotesSection, track) : 0,
+    newsEls,
+    newsTops: newsEls.map((el) => layoutTop(el, track)),
+    quoteEls,
+    quoteLayout: quoteEls.map((el) => ({
+      top: layoutTop(el, track),
+      height: el.offsetHeight,
+    })),
+    encourageTop: encourageSection ? layoutTop(encourageSection, track) : 0,
+    encourageHeight: encourageSection?.offsetHeight ?? 0,
+  };
 }
 
-function easeOutCubic(t: number) {
-  return 1 - (1 - t) ** 3;
+function applyTrackOffset(track: HTMLElement, offset: number) {
+  track.style.transform = `translate3d(0, ${-offset}px, 0)`;
+}
+
+function preloadImages(urls: string[]) {
+  return Promise.all(
+    urls.map(async (src) => {
+      const img = new Image();
+      img.decoding = "async";
+      img.src = src;
+      try {
+        await img.decode();
+      } catch {
+        await new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        });
+      }
+    }),
+  );
 }
 
 function creditsRollTranslateY(vh: number, contentHeight: number, progress: number) {
   const h = Math.max(contentHeight, vh * 0.9);
-  const t = easeOutCubic(clamp01(progress));
+  const t = clamp01(progress);
   const startY = vh;
   const endY = -h;
   return startY + (endY - startY) * t;
@@ -158,7 +209,9 @@ export default function AuditStrollPage() {
   const creditsProgressRef = useRef(0);
   const creditsHeightRef = useRef(0);
   const encourageOverrideRef = useRef<number | null>(null);
-  const updateFromScrollRef = useRef<(scrollTop: number) => void>(() => {});
+  const layoutCacheRef = useRef<StrollLayoutCache | null>(null);
+  const scrollOffsetRef = useRef(0);
+  const updateFromScrollRef = useRef<(scrollOffset: number) => void>(() => {});
   const measureCreditsRef = useRef<() => number>(() => 0);
   const finishPlaybackRef = useRef<() => void>(() => {});
 
@@ -169,88 +222,73 @@ export default function AuditStrollPage() {
   const [isAccelerating, setIsAccelerating] = useState(false);
   const [hintVisible, setHintVisible] = useState(true);
   const [encourageOverride, setEncourageOverride] = useState<number | null>(null);
+  const [newsIntroDone, setNewsIntroDone] = useState(false);
   const [creditsActive, setCreditsActive] = useState(false);
-  const [creditsProgress, setCreditsProgress] = useState(0);
   const [creditsHeight, setCreditsHeight] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(800);
 
-  const updateFromScroll = useCallback((scrollTop: number) => {
+  const updateFromScroll = useCallback((scrollOffset: number) => {
     if (phaseRef.current !== "scroll") return;
 
-    const vh = window.innerHeight;
+    const layout = layoutCacheRef.current;
     const track = trackRef.current;
-    const viewport = viewportRef.current;
-    if (!track || !viewport) return;
+    if (!layout || !track) return;
 
-    const topInScroll = (el: HTMLElement) => layoutTop(el, viewport, scrollTop);
+    const { vh, quotesTop, newsEls, newsTops, quoteEls, quoteLayout } = layout;
+    const scrollTarget = scrollTargetRef.current;
 
-    const newsSection = track.querySelector<HTMLElement>("[data-stroll-news-section]");
-    const quotesSection = track.querySelector<HTMLElement>("[data-stroll-quotes-section]");
+    const fadeStart = quotesTop - vh * 1.05;
+    const fadeEnd = quotesTop - vh * 0.25;
+    const sectionFade = 1 - clamp01((scrollOffset - fadeStart) / (fadeEnd - fadeStart));
+    const revealLine = scrollOffset + vh * 0.74;
 
-    if (newsSection) {
-      const quotesTop = quotesSection
-        ? topInScroll(quotesSection)
-        : topInScroll(newsSection) + newsSection.offsetHeight;
-      const fadeStart = quotesTop - vh * 1.05;
-      const fadeEnd = quotesTop - vh * 0.25;
-      const sectionFade = 1 - clamp01((scrollTop - fadeStart) / (fadeEnd - fadeStart));
-      const revealLine = scrollTop + vh * 0.74;
+    newsEls.forEach((el, index) => {
+      const order = Number(el.dataset.revealOrder ?? index);
 
-      const newsEls = newsSection.querySelectorAll<HTMLElement>("[data-stroll-news]");
-      const scrollTarget = scrollTargetRef.current;
-      const scrollProgress = scrollTarget > 0 ? clamp01(scrollTop / scrollTarget) : 0;
-
-      newsEls.forEach((el) => {
-        const order = Number(el.dataset.revealOrder ?? 0);
-        let itemIn: number;
-
-        if (order < STROLL_NEWS_INTRO_STOPS.length) {
-          const band = STROLL_NEWS_INTRO_STOPS[order]!;
-          itemIn = clamp01((scrollProgress - band.start) / (band.end - band.start));
-          if (order > 0) {
-            const prev = STROLL_NEWS_INTRO_STOPS[order - 1]!;
-            const prevIn = clamp01((scrollProgress - prev.start) / (prev.end - prev.start));
-            itemIn = Math.min(itemIn, clamp01(prevIn * 1.35));
-          }
-        } else {
-          const top = topInScroll(el);
-          const revealStart = top - vh * 0.12;
-          const revealEnd = top + vh * 0.06;
-          itemIn = clamp01((revealLine - revealStart) / (revealEnd - revealStart));
-          if (order > 0) {
-            const prev = newsEls[order - 1];
-            if (prev) {
-              const prevTop = topInScroll(prev);
-              const prevStart = prevTop - vh * 0.12;
-              const prevEnd = prevTop + vh * 0.06;
-              const prevIn = clamp01((revealLine - prevStart) / (prevEnd - prevStart));
-              itemIn = Math.min(itemIn, clamp01(prevIn * 1.4));
-            }
-          }
+      if (order < 3) {
+        if (sectionFade < 0.999) {
+          setNewsTileOpacity(el, sectionFade);
         }
+        return;
+      }
 
-        el.style.opacity = String(itemIn * sectionFade);
-      });
-    }
+      const top = newsTops[index] ?? 0;
+      const revealStart = top - vh * 0.12;
+      const revealEnd = top + vh * 0.06;
+      let itemIn = clamp01((revealLine - revealStart) / (revealEnd - revealStart));
+      if (order > 0) {
+        const prevTop = newsTops[order - 1] ?? top;
+        const prevStart = prevTop - vh * 0.12;
+        const prevEnd = prevTop + vh * 0.06;
+        const prevIn = clamp01((revealLine - prevStart) / (prevEnd - prevStart));
+        itemIn = Math.min(itemIn, clamp01(prevIn * 1.4));
+      }
 
-    const quoteEls = track.querySelectorAll<HTMLElement>("[data-stroll-quote]");
-    let prevTextBottom: number | null = null;
-    quoteEls.forEach((el) => {
-      const top = topInScroll(el);
-      const height = el.offsetHeight;
-      el.style.opacity = String(
-        quoteSequenceOpacity(scrollTop, top, height, vh, prevTextBottom),
-      );
-      prevTextBottom = top + height;
+      setNewsTileOpacity(el, itemIn * sectionFade);
     });
 
-    const encourageEl = track.querySelector<HTMLElement>("[data-stroll-encourage]");
-    if (encourageEl && encourageOverrideRef.current === null) {
-      const top = topInScroll(encourageEl);
-      const height = encourageEl.offsetHeight;
-      encourageEl.style.opacity = String(
-        quoteSequenceOpacity(scrollTop, top, height, vh, prevTextBottom),
-      );
+    let prevTextBottom: number | null = null;
+    if (scrollOffset + vh > quotesTop - vh * 0.5) {
+      quoteEls.forEach((el, index) => {
+        const { top, height } = quoteLayout[index] ?? { top: 0, height: 0 };
+        el.style.opacity = String(
+          quoteSequenceOpacity(scrollOffset, top, height, vh, prevTextBottom),
+        );
+        prevTextBottom = top + height;
+      });
+
+      const encourageEl = track.querySelector<HTMLElement>("[data-stroll-encourage]");
+      if (encourageEl && encourageOverrideRef.current === null) {
+        encourageEl.style.opacity = String(
+          quoteSequenceOpacity(
+            scrollOffset,
+            layout.encourageTop,
+            layout.encourageHeight,
+            vh,
+            prevTextBottom,
+          ),
+        );
+      }
     }
   }, []);
 
@@ -279,26 +317,60 @@ export default function AuditStrollPage() {
   measureCreditsRef.current = measureCredits;
   finishPlaybackRef.current = finishPlayback;
 
-  const runPlayback = useCallback(() => {
+  const refreshLayout = useCallback(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!viewport || !track) return null;
+
+    applyTrackOffset(track, scrollOffsetRef.current);
+    const layout = measureStrollLayout(track, viewport);
+    layoutCacheRef.current = layout;
+    scrollTargetRef.current = layout.scrollTarget;
+    setViewportHeight(layout.vh);
+    return layout;
+  }, []);
+
+  const runPlayback = useCallback(async () => {
     const viewport = viewportRef.current;
     const track = trackRef.current;
     if (!viewport || !track || startedRef.current) return;
+
+    await preloadImages(STROLL_NEWS_IMAGES.slice(0, 3));
+
     startedRef.current = true;
-
-    setViewportHeight(viewport.clientHeight);
     measureCreditsRef.current();
+    refreshLayout();
+    applyTrackOffset(track, 0);
 
-    const encourageSection = track.querySelector<HTMLElement>("[data-stroll-encourage-section]");
-    if (encourageSection) {
-      scrollTargetRef.current = getEncourageScrollTarget(viewport, encourageSection);
-    }
+    void preloadImages(STROLL_NEWS_IMAGES.slice(3));
 
     phaseRef.current = "scroll";
     phaseStartRef.current = performance.now();
     lastFrameRef.current = null;
+    progressRef.current = 0;
 
-    const scrollEl = viewport;
+    window.setTimeout(() => {
+      setNewsIntroDone(true);
+      refreshLayout();
+      updateFromScrollRef.current(scrollOffsetRef.current);
+    }, STROLL_NEWS_EXTENDED_MOUNT_MS);
+
     const trackEl = track;
+    const viewportEl = viewport;
+
+    function applyScrollOffset(offset: number) {
+      scrollOffsetRef.current = offset;
+      applyTrackOffset(trackEl, offset);
+    }
+
+    function applyCreditsTransform(progress: number) {
+      const rollEl = creditsRollRef.current;
+      if (!rollEl) return;
+      const vh = layoutCacheRef.current?.vh ?? viewportEl.clientHeight;
+      const contentHeight = creditsHeightRef.current || vh * 0.9;
+      const y = creditsRollTranslateY(vh, contentHeight, progress);
+      rollEl.style.transform = `translate3d(0, ${y}px, 0)`;
+    }
 
     function tick(now: number) {
       if (lastFrameRef.current === null) lastFrameRef.current = now;
@@ -312,13 +384,14 @@ export default function AuditStrollPage() {
             1,
             progressRef.current + (delta / STROLL_SCROLL_DURATION_MS) * speed,
           );
-          const t = easeInOutCubic(progressRef.current);
+          const t = progressRef.current;
           const scrollT = mapScrollProgress(t);
-          scrollEl.scrollTop = scrollT * scrollTargetRef.current;
-          updateFromScrollRef.current(scrollEl.scrollTop);
+          const offset = scrollT * scrollTargetRef.current;
+          applyScrollOffset(offset);
+          updateFromScrollRef.current(offset);
 
           if (progressRef.current >= 1) {
-            scrollEl.scrollTop = scrollTargetRef.current;
+            applyScrollOffset(scrollTargetRef.current);
             phaseRef.current = "encourage_hold";
             phaseStartRef.current = now;
             encourageOverrideRef.current = 1;
@@ -330,7 +403,7 @@ export default function AuditStrollPage() {
           break;
         }
         case "encourage_hold": {
-          scrollEl.scrollTop = scrollTargetRef.current;
+          applyScrollOffset(scrollTargetRef.current);
           if (now - phaseStartRef.current >= STROLL_ENCOURAGE_HOLD_MS / speed) {
             phaseRef.current = "encourage_fade";
             phaseStartRef.current = now;
@@ -338,7 +411,7 @@ export default function AuditStrollPage() {
           break;
         }
         case "encourage_fade": {
-          scrollEl.scrollTop = scrollTargetRef.current;
+          applyScrollOffset(scrollTargetRef.current);
           const fadeT = clamp01((now - phaseStartRef.current) / (STROLL_ENCOURAGE_FADE_MS / speed));
           const opacity = 1 - fadeT;
           encourageOverrideRef.current = opacity;
@@ -350,13 +423,13 @@ export default function AuditStrollPage() {
             if (encourageEl) encourageEl.style.opacity = "0";
             const measured = measureCreditsRef.current();
             if (measured === 0) {
-              creditsHeightRef.current = scrollEl.clientHeight * 1.2;
+              creditsHeightRef.current = viewportEl.clientHeight * 1.2;
               setCreditsHeight(creditsHeightRef.current);
             }
             phaseRef.current = "credits";
             phaseStartRef.current = now;
             creditsProgressRef.current = 0;
-            setCreditsProgress(0);
+            applyCreditsTransform(0);
             setCreditsActive(true);
             setCreditsLayerOpacity(1);
             setTrackOpacity(0);
@@ -372,7 +445,7 @@ export default function AuditStrollPage() {
             1,
             creditsProgressRef.current + (delta / STROLL_CREDITS_ROLL_MS) * speed,
           );
-          setCreditsProgress(creditsProgressRef.current);
+          applyCreditsTransform(creditsProgressRef.current);
           if (creditsProgressRef.current >= 1) {
             phaseRef.current = "brand";
             phaseStartRef.current = now;
@@ -403,7 +476,7 @@ export default function AuditStrollPage() {
     }
 
     rafRef.current = requestAnimationFrame(tick);
-  }, []);
+  }, [refreshLayout]);
 
   useEffect(() => {
     if (isAuditEmbedContext() && window.self !== window.top) {
@@ -423,20 +496,20 @@ export default function AuditStrollPage() {
   useEffect(() => {
     measureCredits();
     const onResize = () => {
-      setViewportHeight(window.innerHeight);
       measureCredits();
+      refreshLayout();
+      updateFromScrollRef.current(scrollOffsetRef.current);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, [measureCredits]);
+  }, [measureCredits, refreshLayout]);
 
   useEffect(() => {
-    const viewport = viewportRef.current;
-    if (viewport) updateFromScroll(viewport.scrollTop);
-  }, [updateFromScroll]);
+    refreshLayout();
+  }, [refreshLayout, newsIntroDone]);
 
   useEffect(() => {
-    const timer = window.setTimeout(runPlayback, 500);
+    const timer = window.setTimeout(runPlayback, 120);
     return () => {
       window.clearTimeout(timer);
       cancelAnimationFrame(rafRef.current);
@@ -486,12 +559,6 @@ export default function AuditStrollPage() {
     };
   }, []);
 
-  const creditsTranslateY = creditsRollTranslateY(
-    viewportHeight,
-    creditsHeightRef.current || creditsHeight,
-    creditsProgress,
-  );
-
   return (
     <div className="audit-stroll-ending">
       <div className="audit-stroll-viewport" ref={viewportRef}>
@@ -500,7 +567,7 @@ export default function AuditStrollPage() {
           ref={trackRef}
           style={{ opacity: trackOpacity }}
         >
-          <StrollNewsSection />
+          <StrollNewsSection showExtendedTiles={newsIntroDone} />
 
           <section className="audit-stroll-section audit-stroll-section--quotes" aria-label="寄语" data-stroll-quotes-section>
             {STROLL_COMFORT_LINES.map((line, index) => (
@@ -535,11 +602,7 @@ export default function AuditStrollPage() {
         style={{ opacity: creditsActive ? creditsLayerOpacity : 0 }}
         aria-hidden={!creditsActive}
       >
-        <div
-          ref={creditsRollRef}
-          className="audit-stroll-credits-roll__inner"
-          style={{ transform: `translateY(${creditsTranslateY}px)` }}
-        >
+        <div ref={creditsRollRef} className="audit-stroll-credits-roll__inner">
           <div className="audit-stroll-credits">
             <StrollCreditsContent />
           </div>

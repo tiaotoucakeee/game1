@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { ANI_CHAT_SUGGESTIONS } from "@/lib/ani-coze-config";
+import { FormEvent, useCallback, useEffect, useRef } from "react";
+import { ANI_CHAT_STATUS_LABEL, ANI_CHAT_SUGGESTIONS, getAniFollowUpSuggestions } from "@/lib/ani-coze-config";
 import { useAniChatStream } from "@/hooks/useAniChatStream";
 import { OPEN_PATH_CODE, PLAYER } from "@/data/game";
 import { useGame } from "@/lib/game-state";
@@ -16,20 +15,18 @@ export function AniChatSidebar({
 }) {
   const { setAniChatComplete, addClue } = useGame();
   const listRef = useRef<HTMLDivElement>(null);
-  const [codeUnlocked, setCodeUnlocked] = useState(false);
 
   const handleAssistantComplete = useCallback(
     (content: string) => {
       if (content.includes(OPEN_PATH_CODE)) {
         setAniChatComplete(true);
         addClue("open_path_code");
-        setCodeUnlocked(true);
       }
     },
     [addClue, setAniChatComplete],
   );
 
-  const { messages, input, setInput, isStreaming, mode, error, sendMessage, stopStreaming, resetChat } =
+  const { messages, input, setInput, isStreaming, error, isHydrated, sendMessage, stopStreaming, resetChat } =
     useAniChatStream({
       userId: PLAYER.studentId,
       onAssistantComplete: handleAssistantComplete,
@@ -41,8 +38,22 @@ export function AniChatSidebar({
     el.scrollTop = el.scrollHeight;
   }, [messages]);
 
-  const showSuggestions =
-    messages.length === 1 && messages[0]?.id === "welcome" && !isStreaming;
+  const hasStarted = messages.some((message) => message.role === "user");
+  const showWelcomeSuggestions = !hasStarted && !isStreaming;
+  const codeUnlocked =
+    isHydrated &&
+    messages.some(
+      (message) => message.role === "assistant" && message.content.includes(OPEN_PATH_CODE),
+    );
+  const followUpSuggestions = getAniFollowUpSuggestions(messages, codeUnlocked);
+  const lastMessage = messages[messages.length - 1];
+  const showFollowUpSuggestions =
+    !isStreaming &&
+    !codeUnlocked &&
+    hasStarted &&
+    lastMessage?.role === "assistant" &&
+    lastMessage.id !== "welcome" &&
+    followUpSuggestions.length > 0;
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -65,7 +76,7 @@ export function AniChatSidebar({
           />
           <div>
             <strong>Ani AI</strong>
-            <span>{mode === "coze" ? "Coze 已连接" : "演示模式 · 流式输出"}</span>
+            <span>{ANI_CHAT_STATUS_LABEL}</span>
           </div>
         </div>
         <div className="student-portal__ani-chat-head-actions">
@@ -119,9 +130,24 @@ export function AniChatSidebar({
                 <p>{message.content || (message.streaming ? "Ani 正在输入…" : "")}</p>
               </div>
             </div>
-            {message.id === "welcome" && showSuggestions ? (
+            {message.id === "welcome" && showWelcomeSuggestions ? (
               <div className="student-portal__ani-chat-suggestions">
                 {ANI_CHAT_SUGGESTIONS.map((question) => (
+                  <button
+                    key={question}
+                    type="button"
+                    className="student-portal__ani-chat-suggestion"
+                    disabled={isStreaming}
+                    onClick={() => void sendMessage(question)}
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+            {showFollowUpSuggestions && message.id === lastMessage?.id ? (
+              <div className="student-portal__ani-chat-suggestions is-follow-up">
+                {followUpSuggestions.map((question) => (
                   <button
                     key={question}
                     type="button"
@@ -142,8 +168,7 @@ export function AniChatSidebar({
 
       {codeUnlocked ? (
         <div className="student-portal__ani-chat-unlock">
-          已获得隐藏代码。请完成审核调查后，前往{" "}
-          <Link href="/audit/recruit">项目招募页</Link> 输入。
+          已获得开放创作路径招募码。请继续完成审核调查；在审核工作台最终提交结论时，你将收到特殊邀请。
         </div>
       ) : null}
 

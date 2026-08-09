@@ -7,7 +7,6 @@ export const FULLSCREEN_AUDIT_PATHS = new Set([
   "/audit/delete",
   "/audit/truth",
   "/audit/stroll",
-  "/audit/recruit",
   "/audit/summer",
   "/audit/reflection",
   "/audit/path-invite",

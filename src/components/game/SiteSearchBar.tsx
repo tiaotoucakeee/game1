@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { GameLink } from "@/components/game/GameLink";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { isChengYeSearch } from "@/data/game";
@@ -24,13 +24,16 @@ function SearchIcon({ className }: { className?: string }) {
   );
 }
 
-export function SiteSearchBar({
-  defaultValue = "",
-  variant = "page",
-}: {
-  defaultValue?: string;
-  variant?: "page" | "nav";
-}) {
+/** 导航栏搜索入口：无 href，悬停不显示 URL */
+export function NavSearchTrigger() {
+  return (
+    <GameLink href="/anima/search" className="nav-search-trigger" aria-label="全站搜索">
+      <SearchIcon className="nav-search-icon" />
+    </GameLink>
+  );
+}
+
+function SiteSearchForm({ defaultValue }: { defaultValue: string }) {
   const router = useRouter();
   const { setSearchedChengYe } = useGame();
   const [q, setQ] = useState(defaultValue);
@@ -48,14 +51,6 @@ export function SiteSearchBar({
     router.push(`/anima/search?q=${encodeURIComponent(trimmed)}`);
   }
 
-  if (variant === "nav") {
-    return (
-      <Link href="/anima/search" className="nav-search-trigger" aria-label="全站搜索">
-        <SearchIcon className="nav-search-icon" />
-      </Link>
-    );
-  }
-
   return (
     <form onSubmit={onSubmit} className="search-page-bar">
       <div className="search-page-bar-inner">
@@ -71,4 +66,18 @@ export function SiteSearchBar({
       </div>
     </form>
   );
+}
+
+export function SiteSearchBar({
+  defaultValue = "",
+  variant = "page",
+}: {
+  defaultValue?: string;
+  variant?: "page" | "nav";
+}) {
+  if (variant === "nav") {
+    return <NavSearchTrigger />;
+  }
+
+  return <SiteSearchForm defaultValue={defaultValue} />;
 }

@@ -1,0 +1,169 @@
+@charset "UTF-8";
+.noticeBox .pull-left {
+  width: calc(100% - 80px); }
+.noticeBox .announcementBox {
+  position: relative; }
+  .noticeBox .announcementBox .tips {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: red;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    font-style: normal;
+    line-height: 1;
+    padding: 3px 8px;
+    -webkit-transform: scale(0.84, 0.84);
+    transform: scale(0.84, 0.84);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    vertical-align: middle; }
+    .noticeBox .announcementBox .tips .icon {
+      margin-right: 6px;
+      width: 10px;
+      height: 10px;
+      display: inline-block; }
+  .noticeBox .announcementBox .title {
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 5px;
+    display: block; }
+    .noticeBox .announcementBox .title.ShowTips {
+      max-width: calc(100% - 75px);
+      max-width: -webkit-calc(100% - 75px); }
+    .noticeBox .announcementBox .title.redColor {
+      color: red; }
+  .noticeBox .announcementBox .infoPublic {
+    color: red; }
+    .noticeBox .announcementBox .infoPublic + .title {
+      max-width: calc(100% - 75px);
+      max-width: -webkit-calc(100% - 75px); }
+    .noticeBox .announcementBox .infoPublic + .title.ShowTips {
+      max-width: calc(100% - 140px);
+      max-width: -webkit-calc(100% - 140px); }
+
+/*通知公告、留言板选项卡区域 */
+.mainHomeRightTab {
+  position: relative; }
+  .mainHomeRightTab .more {
+    top: 14px;
+    right: 10px;
+    position: absolute;
+    z-index: 2; }
+  .mainHomeRightTab .widget-header {
+    min-height: 50px;
+    position: relative; }
+    .mainHomeRightTab .widget-header .icon, .mainHomeRightTab .widget-header [class*=" icon-"], .mainHomeRightTab .widget-header [class^=icon-] {
+      color: #323232;
+      font-weight: bold; }
+  .mainHomeRightTab .nav-tabs {
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 12px;
+    position: absolute;
+    border: none; }
+    .mainHomeRightTab .nav-tabs li a {
+      line-height: 22px;
+      background: transparent; }
+  .mainHomeRightTab .nav-tabs > li.active > a, .mainHomeRightTab .nav-tabs > li.active > a:focus, .mainHomeRightTab .nav-tabs > li.active > a:hover {
+    color: #323232; }
+
+/*通知公告、留言板选项卡区域 */
+.mainHomeRightTab {
+  position: relative; }
+  .mainHomeRightTab .more {
+    top: 14px;
+    right: 10px;
+    position: absolute;
+    z-index: 2; }
+  .mainHomeRightTab .widget-header {
+    min-height: 50px;
+    position: relative; }
+    .mainHomeRightTab .widget-header .icon, .mainHomeRightTab .widget-header [class*=" icon-"], .mainHomeRightTab .widget-header [class^=icon-] {
+      color: #323232;
+      font-weight: bold; }
+  .mainHomeRightTab .nav-tabs {
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 12px;
+    position: absolute;
+    border: none; }
+    .mainHomeRightTab .nav-tabs li a {
+      line-height: 22px;
+      background: transparent; }
+  .mainHomeRightTab .nav-tabs > li.active > a, .mainHomeRightTab .nav-tabs > li.active > a:focus, .mainHomeRightTab .nav-tabs > li.active > a:hover {
+    color: #323232; }
+
+.NoticeBox .SchoolInfoSpecial .list-group-item {
+  border: none;
+  margin-bottom: 8px;
+  background: #ebf0fe;
+  border-radius: 8px;
+  padding: 12px 10px;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear; }
+  .NoticeBox .SchoolInfoSpecial .list-group-item:hover {
+    background: #6672fb;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+    -webkit-transform: translate3D(0, -5px, 0);
+    transform: translate3D(0, -5px, 0);
+    color: #fff; }
+    .NoticeBox .SchoolInfoSpecial .list-group-item:hover * {
+      color: #fff; }
+    .NoticeBox .SchoolInfoSpecial .list-group-item:hover .announcementBox .title.redColor {
+      color: #fff; }
+.NoticeBox .MainHomeWebVersion {
+  padding-top: 10px; }
+  .NoticeBox .MainHomeWebVersion .list-group-item {
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: #fff;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear; }
+    .NoticeBox .MainHomeWebVersion .list-group-item:hover {
+      -webkit-transform: translate3D(0, -5px, 0);
+      transform: translate3D(0, -5px, 0); }
+  .NoticeBox .MainHomeWebVersion .list-group {
+    margin-bottom: 0; }
+  .NoticeBox .MainHomeWebVersion.MainHomeTransparent .noticeBox .announcementBox .title.redColor, .NoticeBox .MainHomeWebVersion.MainHomeTransparent .noticeBox .announcementBox .title.titleRemind {
+    color: #00c2ff; }
+  .NoticeBox .MainHomeWebVersion.MainHomeTransparent .noticeBox .announcementBox .infoPublic {
+    color: #00c2ff; }
+  .NoticeBox .MainHomeWebVersion.MainHomeYouth .list-group-item {
+    color: #403d3d; }
+  .NoticeBox .MainHomeWebVersion.MainHomeYouth .noticeBox .announcementBox .title.redColor, .NoticeBox .MainHomeWebVersion.MainHomeYouth .noticeBox .announcementBox .title.titleRemind {
+    color: #006699; }
+  .NoticeBox .MainHomeWebVersion.MainHomeYouth .noticeBox .announcementBox .infoPublic {
+    color: #006699; }
+  .NoticeBox .MainHomeWebVersion.MainHomeWebVersion04 .list-group-item {
+    color: #006699; }
+  .NoticeBox .MainHomeWebVersion.MainHomeWebVersion06 .list-group-item {
+    color: #000; }
+  .NoticeBox .MainHomeWebVersion.MainHomeWebVersion07 .list-group-item {
+    color: #000; }
+  .NoticeBox .MainHomeWebVersion.MainHomeWebVersion08 .list-group-item {
+    color: #000; }
+  .NoticeBox .MainHomeWebVersion.MainHomeWebVersion09 .list-group-item {
+    color: #000; }
+.NoticeBox .SchoolInfo2078 .list-group-item {
+  border-right: none;
+  border-left: none; }
+  .NoticeBox .SchoolInfo2078 .list-group-item:first-child {
+    border-top: none; }
+  .NoticeBox .SchoolInfo2078 .list-group-item:last-child {
+    border-bottom: none; }
+  .NoticeBox .SchoolInfo2078 .list-group-item:first-child, .NoticeBox .SchoolInfo2078 .list-group-item:last-child {
+    border-radius: 0; }
+.NoticeBox .SchoolInfo2078 .list-group {
+  margin-bottom: 0; }
+
+/*# sourceMappingURL=HomeNoticeList.css.map */

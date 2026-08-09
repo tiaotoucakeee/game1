@@ -170,8 +170,8 @@ export function AuditExpertShell({ children }: { children: React.ReactNode }) {
       <footer className="footerInfo hidden-xs">
         <ul>
           <li>推荐使用谷歌浏览器,360浏览器极速模式登录</li>
-          <li>技术支持&nbsp;QQ：1516849328 1075477985&nbsp;电话：010-58235529</li>
-          <li>维护：东方博冠（北京）科技有限公司</li>
+          <li>技术支持&nbsp;QQ：3847291056 6291847305&nbsp;电话：010-84729361</li>
+          <li>维护：传媒大学数字媒体中心</li>
           <li>版本号：3.0.1.0919</li>
           <li>备案号：</li>
         </ul>

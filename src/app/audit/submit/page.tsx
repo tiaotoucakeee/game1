@@ -9,7 +9,7 @@ import {
   SubmitSpoilerDialog,
   useSubmitSpoilerReveals,
 } from "@/components/audit/SubmitClueReveal";
-import { CORE_CLUES, hasAllCoreClues } from "@/data/game";
+import { CORE_CLUES, CLUE_SOURCES, hasAllCoreClues } from "@/data/game";
 import { navigateAuditFullscreen } from "@/lib/audit-embed";
 import { useGame } from "@/lib/game-state";
 import type { ClueId } from "@/types/game";
@@ -260,7 +260,7 @@ function SubmitContent() {
                       <tr>
                         <th style={{ width: 52 }}>状态</th>
                         <th>线索内容</th>
-                        <th style={{ width: 88 }}>来源模块</th>
+                        <th style={{ width: 200 }}>对应页面</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -284,12 +284,9 @@ function SubmitContent() {
                                 onRequestReveal={() => requestReveal(clueId, collected)}
                               />
                             </td>
-                            <td className="audit-wb-muted">
-                              {clueId.startsWith("identity")
-                                ? "W05"
-                                : clueId.startsWith("project")
-                                  ? "W06"
-                                  : "W09–W10"}
+                            <td className="audit-submit-clue-source">
+                              <span className="audit-submit-clue-source-page">{CLUE_SOURCES[clueId].page}</span>
+                              <span className="audit-submit-clue-source-trigger">{CLUE_SOURCES[clueId].trigger}</span>
                             </td>
                           </tr>
                         );

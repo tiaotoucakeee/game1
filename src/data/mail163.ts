@@ -35,7 +35,7 @@ export const mailAccount = {
 };
 
 const DEV_GROUP = "《动画学院暑期勤工俭学事件》开发组";
-const STROLL_PRODUCTION_GROUP = "《不存在的学生》制作组";
+const STROLL_PRODUCTION_GROUP = "《动画学院暑期勤工俭学事件》制作组";
 
 export const mailListItems: MailListItem[] = [
   {
@@ -337,7 +337,7 @@ const strollThanksMail: OpenMail = {
     {
       type: "text",
       content:
-        "如果你正在读这封信，说明你已经走完了《不存在的学生》里那条「被看见的路径」，并找到了真结局。",
+        "如果你正在读这封信，说明你已经走完了《动画学院暑期勤工俭学事件》里那条「被看见的路径」，并找到了真结局。",
       tone: "lead",
     },
     {

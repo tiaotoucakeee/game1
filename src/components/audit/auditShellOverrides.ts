@@ -28,6 +28,23 @@ export const AUDIT_EMBED_OVERRIDE_CSS = `
 .audit-graduates-page .audit-query-table .col-name{width:80px}
 .audit-graduates-page .audit-query-table .col-bio{min-width:160px;max-width:340px;font-size:14px;line-height:1.65;color:#444}
 .audit-graduates-page .audit-query-table .col-op{width:92px;overflow:visible!important}
+.audit-graduates-page.audit-graduates-page--mac{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:"PingFang SC","Helvetica Neue","Microsoft YaHei",system-ui,sans-serif}
+.audit-graduates-page.audit-graduates-page--mac .audit-graduates-layout{gap:12px;max-width:100%}
+.audit-graduates-page.audit-graduates-page--mac .audit-graduates-table-panel{max-width:100%}
+.audit-graduates-page.audit-graduates-page--mac .audit-graduates-paper-zone{flex:0 0 clamp(160px,32vw,340px);width:clamp(160px,32vw,340px);min-height:480px;flex-shrink:0}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table-wrap{overflow-x:auto!important;overflow-y:visible;-webkit-overflow-scrolling:touch}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table{min-width:680px;table-layout:auto;border-collapse:separate;border-spacing:0;font-size:13px;-webkit-font-smoothing:antialiased}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table thead th{padding:10px 8px;font-size:13px;vertical-align:middle;line-height:1.35;white-space:normal}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table tbody tr{height:auto}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table tbody td{padding:10px 8px;font-size:13px;line-height:1.6;vertical-align:top!important;overflow:hidden!important;word-break:break-word;overflow-wrap:anywhere;height:auto}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-seq{width:48px;white-space:nowrap}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-id{width:104px;font-size:12px;white-space:nowrap}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-major{width:96px;white-space:normal;line-height:1.4}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-name{width:68px;white-space:nowrap}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-bio{min-width:200px;max-width:none;width:auto;font-size:13px;line-height:1.65;color:#444;text-align:left}
+.audit-graduates-page.audit-graduates-page--mac .audit-query-table .col-op{width:88px;min-width:88px;overflow:visible!important;white-space:nowrap;vertical-align:middle!important}
+@media (max-width:1200px){.audit-graduates-page.audit-graduates-page--mac .audit-graduates-paper-zone{flex:0 0 clamp(120px,26vw,240px);width:clamp(120px,26vw,240px);min-height:360px}}
+@media (max-width:900px){.audit-graduates-page.audit-graduates-page--mac .audit-graduates-paper-zone{display:none;width:0;flex:0 0 0;min-height:0;overflow:hidden}.audit-graduates-page.audit-graduates-page--mac .audit-graduates-layout{gap:0}}
 .audit-graduates-page .audit-op-btn{padding:6px 12px;font-size:13px}
 .audit-graduates-submit{display:flex;justify-content:flex-end;padding:14px 4px 4px;border-top:1px solid #ececec;margin-top:4px}
 .audit-graduates-submit__btn{min-width:96px;padding:8px 28px;border:none;border-radius:4px;background:#3280fc;color:#fff;font-size:14px;font-weight:600;line-height:1.4;cursor:pointer;transition:background .2s ease,opacity .2s ease,box-shadow .2s ease;box-shadow:0 1px 3px rgba(50,128,252,.35)}

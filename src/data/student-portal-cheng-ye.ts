@@ -51,7 +51,7 @@ export const CHENG_YE_PORTAL_MENU: StudentPortalLink[] = [
     id: "innovation",
     label: "大学生创新…",
     keywords: ["创新", "未命名之路"],
-    href: "/anima/news/innovation-award-2034",
+    disabled: true,
   },
   {
     id: "thesis",
@@ -69,7 +69,7 @@ export const CHENG_YE_PORTAL_MENU: StudentPortalLink[] = [
     id: "anima",
     label: "学院官网",
     keywords: ["学院", "官网"],
-    href: "/anima",
+    disabled: true,
   },
   {
     id: "mail",

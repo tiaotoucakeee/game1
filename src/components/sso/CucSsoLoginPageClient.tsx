@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { GameLink } from "@/components/game/GameLink";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -85,9 +85,9 @@ export function CucSsoLoginPageClient({
         }}
       />
 
-      <Link href="/anima" className="audit-sso-back-home">
+      <GameLink href="/anima" className="audit-sso-back-home">
         ← 返回官网主页
-      </Link>
+      </GameLink>
 
       <div className="audit-sso-lang">
         <button

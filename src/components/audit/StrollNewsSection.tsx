@@ -4,7 +4,7 @@ import {
   STROLL_NEWS_MOSAIC_HEIGHT_VH,
 } from "@/data/audit-stroll";
 
-export function StrollNewsSection() {
+export function StrollNewsSection({ showExtendedTiles = false }: { showExtendedTiles?: boolean }) {
   return (
     <section
       className="audit-stroll-section audit-stroll-section--news"
@@ -15,10 +15,13 @@ export function StrollNewsSection() {
         className="audit-stroll-news-mosaic"
         style={{ minHeight: `${STROLL_NEWS_MOSAIC_HEIGHT_VH}vh` }}
       >
-        {STROLL_NEWS_MOSAIC.map((tile, order) => (
+        {STROLL_NEWS_MOSAIC.map((tile, order) => {
+          if (order >= 3 && !showExtendedTiles) return null;
+
+          return (
           <figure
             key={`${tile.imageIndex}-${order}`}
-            className={`audit-stroll-news-tile audit-stroll-news-tile--${tile.slot}`}
+            className={`audit-stroll-news-tile audit-stroll-news-tile--${tile.slot}${order < 3 ? ` audit-stroll-news-tile--intro-${order}` : ""}`}
             data-stroll-news
             data-reveal-order={order}
             style={{
@@ -34,10 +37,13 @@ export function StrollNewsSection() {
               alt=""
               className="audit-stroll-news-tile__img"
               loading={order < 3 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={order < 3 ? "high" : "auto"}
               draggable={false}
             />
           </figure>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

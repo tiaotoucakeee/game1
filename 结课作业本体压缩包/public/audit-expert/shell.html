@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="os-windows screen-desktop-wide device-desktop" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <title>数字媒体中心审核工作台</title>
+  <link rel="stylesheet" href="/audit-expert/global.css">
+  <link rel="stylesheet" href="/audit-expert/iconfont.css">
+  <link rel="stylesheet" href="/audit-expert/LeftMenuT.css">
+  <link rel="stylesheet" href="/audit-expert/WZJStyle.css">
+  <link rel="stylesheet" href="/audit-expert/shell-layout.css">
+  <script src="/audit-expert/jquery-3.6.1.min.js"></script>
+</head>
+<body class="Body-2031">
+  <input type="hidden" value="2031" id="SchoolCodeVlue">
+  <input type="hidden" value="1" id="UserTypeVlue">
+
+  <nav class="navbar navbar-default CafaHeaderNav" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header LeftFloat hidden-xs navbar-header2031">
+        <a class="navbar-brand" href="javascript:void(0)" id="leftTopLogo">
+          <img src="/audit-expert/logo.png" class="logo" alt="中国传媒大学">
+        </a>
+        <ul class="logo-name logo-name-boderRt" id="logo-name">
+          <li id="ProductName">数字媒体中心审核工作台</li>
+          <li id="ProductNameEn">Digital Media Center Audit Workbench</li>
+        </ul>
+      </div>
+      <ul class="g-userinfo RightFloat">
+        <li class="li01 g-userinfo-dropdown">
+          <span class="g-userinfo-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="#cc0000"/>
+              <circle cx="12" cy="9.5" r="3.2" fill="#fff"/>
+              <path d="M7 17.5c.8-2.8 2.8-4.5 5-4.5s4.2 1.7 5 4.5" fill="#fff"/>
+            </svg>
+          </span>
+          <a href="javascript:void(0)">
+            临时审核员
+            <span class="audit-caret" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="li02">
+          <span class="g-userinfo-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3.5v5.5" stroke="#cc0000" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M17.8 8.2a6.5 6.5 0 1 1-11.6 0" stroke="#cc0000" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <a href="javascript:void(0)" id="logoutBtn">退出系统</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-container" id="main-container">
+    <div class="main-container-inner">
+      <div class="sidebar" id="sidebar">
+        <div id="menu_style" class="menu_style">
+          <ul class="nav nav-list" id="nav_list"></ul>
+        </div>
+        <div class="sidebar-collapse" id="sidebar-collapse">
+          <i class="iconfont icon-youkuohao" data-icon1="iconfont icon-cebianlan" data-icon2="iconfont icon-youkuohao"></i>
+        </div>
+      </div>
+
+      <div class="main-content" id="iframeContent">
+        <div class="breadcrumbs" id="breadcrumbs">
+          <ul class="breadcrumbs_ul breadcrumb" id="breadcrumbList"></ul>
+          <div class="breadcrumbs-right">
+            <div class="rightSubTips jiamiTips">请勿上传涉密材料</div>
+            <a class="rightSubTips" id="shuaxin">刷新当前界面</a>
+          </div>
+        </div>
+        <iframe id="iframe" name="iframe" frameborder="0" src="/audit-expert/MainHome-arg.html"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footerInfo hidden-xs">
+    <ul>
+      <li>推荐使用谷歌浏览器,360浏览器极速模式登录</li>
+      <li>技术支持&nbsp;QQ：1516849328 1075477985&nbsp;电话：<span>010-58235529</span></li>
+      <li>维护：东方博冠（北京）科技有限公司</li>
+      <li>版本号：3.0.1.0919</li>
+      <li>备案号：<span></span></li>
+    </ul>
+  </footer>
+
+  <script src="/audit-expert/audit-bridge.js"></script>
+</body>
+</html>

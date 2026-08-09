@@ -102,19 +102,12 @@ function ProgressPanel({
         收缩全部
       </button>
 
-      <div className="stu-proj__hint">
-        {isChengYe ? (
-          <>
-            <p>该项目已通过 Creative Yard 创作路径机制完成跨模块立项与结项归档。</p>
-            <Link href="/student/home">查看创作路径档案 →</Link>
-          </>
-        ) : (
-          <>
-            <p>你遇到的问题，与林澈当年惊人地相似…</p>
-            <Link href="/student/home?chat=ani">向 Ani AI 寻求帮助 →</Link>
-          </>
-        )}
-      </div>
+      {!isChengYe ? (
+        <div className="stu-proj__hint">
+          <p>你遇到的问题，与林澈当年惊人地相似…</p>
+          <Link href="/student/home?chat=ani">向 Ani AI 寻求帮助 →</Link>
+        </div>
+      ) : null}
     </>
   );
 }

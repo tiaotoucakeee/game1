@@ -25,20 +25,12 @@ export const STROLL_COMFORT_LINES: StrollComfortLine[] = [
     text: "AI 可以生成画面，却生成不了你为何想表达的那一点。",
   },
   {
-    side: "right",
-    text: "跨专业不是边缘，是面向人机分工时代的常态。",
-  },
-  {
     side: "left",
     text: "工具在更新，但故事、角色与交互的逻辑，仍须由人决定。",
   },
   {
     side: "right",
     text: "你此刻的困惑，也曾是每一条新路径的起点。",
-  },
-  {
-    side: "left",
-    text: "焦虑来自未知；理解规则之后，技术会成为延伸。",
   },
   {
     side: "right",
@@ -58,11 +50,11 @@ export const STROLL_CREDITS = {
     "中国传媒大学 · 动画与数字艺术学院",
   ],
   membersTitle: "小组成员",
-  members: ["徐子棋", "王子玉"],
+  members: ["小糕", "玉子"],
   roles: [
-    { title: "游戏剧本", names: ["徐子棋", "王子玉"] },
-    { title: "游戏美术", names: ["王子玉"] },
-    { title: "网页程序", names: ["徐子棋"] },
+    { title: "游戏剧本", names: ["小糕", "玉子"] },
+    { title: "游戏美术", names: ["玉子"] },
+    { title: "网页程序", names: ["小糕"] },
   ],
   advisorTitle: "指导教师",
   advisors: ["韩帅"],
@@ -93,18 +85,8 @@ export const STROLL_CREDITS_ROLL_MS = 44_000;
 /** 学院 logo 淡入时长（毫秒） */
 export const STROLL_BRAND_FADE_MS = 3000;
 
-/** 开场前三张新闻（1→2→3）渐显所占滚动进度 */
-export const STROLL_NEWS_INTRO_STOPS: Array<{ start: number; end: number }> = [
-  { start: 0, end: 0.005 },
-  { start: 0.004, end: 0.009 },
-  { start: 0.008, end: 0.013 },
-];
-
-/** 开场滚动：前段几乎不滚，留第一张图展示 */
-export const STROLL_SCROLL_INTRO_RATIO = 0.14;
-
-/** 开场滚动：前段最多滚动的路程占比 */
-export const STROLL_SCROLL_INTRO_DISTANCE = 0.012;
+/** 开场仅渲染前三张图；此时间后挂载其余图片（毫秒，滚动会立即开始） */
+export const STROLL_NEWS_EXTENDED_MOUNT_MS = 500;
 
 /** 新闻滚动拼贴：按 1左 → 2右 → 3左 循环；top 为容器高度百分比 */
 export type StrollNewsSlot = "left-wide" | "right-tall" | "left-small";

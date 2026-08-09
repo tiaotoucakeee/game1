@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { navLinks, siteAssets } from "@/data/cuc-anima";
-import { SiteSearchBar } from "@/components/game/SiteSearchBar";
+import { GameLink } from "@/components/game/GameLink";
+import { NavSearchTrigger } from "@/components/game/SiteSearchBar";
 
 export function Navigation() {
   return (
@@ -12,7 +12,7 @@ export function Navigation() {
         <div className="container full-width mx-auto w-full max-w-none px-5">
           <div className="nav-warpper">
             <div className="nav-left">
-              <Link href="/anima" className="shrink-0">
+              <GameLink href="/anima" className="shrink-0">
                 <Image
                   src={siteAssets.logo}
                   alt="cuc-anima-logo"
@@ -21,27 +21,27 @@ export function Navigation() {
                   className="nav-logo"
                   priority
                 />
-              </Link>
+              </GameLink>
               <ul role="list" className="nav-list">
                 {navLinks.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="nav-link w-inline-block">
+                    <GameLink href={link.href} className="nav-link w-inline-block">
                       <span className="nav-link-text">{link.label}</span>
                       <span className="nav-link-underline" aria-hidden />
-                    </Link>
+                    </GameLink>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="nav-right">
-              <SiteSearchBar variant="nav" />
-              <Link href="/audit" className="nav-action-link">
+              <NavSearchTrigger />
+              <GameLink href="/audit" className="nav-action-link" newTab>
                 审核工作台登录
-              </Link>
-              <Link href="/student" className="nav-action-link">
+              </GameLink>
+              <GameLink href="/student" className="nav-action-link" newTab>
                 学生个人系统登录
-              </Link>
+              </GameLink>
             </div>
           </div>
         </div>

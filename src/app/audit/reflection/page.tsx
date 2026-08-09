@@ -21,7 +21,7 @@ function persistEnding(patch: Record<string, unknown>) {
 
 export default function AuditReflectionPage() {
   const router = useRouter();
-  const { clues, auditTerminalUnlocked, setEnding, setArchiveDeleted, hasClue } = useGame();
+  const { ready, clues, auditTerminalUnlocked, setEnding, setArchiveDeleted, hasClue } = useGame();
   const coreComplete = hasAllCoreClues(clues);
   const hasRecruitCode = hasClue("open_path_code");
 
@@ -32,10 +32,11 @@ export default function AuditReflectionPage() {
   }, []);
 
   useEffect(() => {
+    if (!ready) return;
     if (!auditTerminalUnlocked || !coreComplete) {
       router.replace("/audit/submit");
     }
-  }, [auditTerminalUnlocked, coreComplete, router]);
+  }, [ready, auditTerminalUnlocked, coreComplete, router]);
 
   function finalizePathEnding() {
     if (hasRecruitCode) {

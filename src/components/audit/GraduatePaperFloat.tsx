@@ -9,10 +9,18 @@ export const PAPER_WIDTH = 640;
 export const PAPER_ZONE_WIDTH = 660;
 const LONG_PRESS_MS = 450;
 
-function clampPosition(x: number, y: number) {
-  const minX = -PAPER_WIDTH * 0.92;
-  const maxX = window.innerWidth - PAPER_WIDTH * 0.08;
-  const minY = -PAPER_WIDTH * 0.35;
+function getMacPaperWidth(viewportWidth: number) {
+  return Math.round(Math.min(PAPER_WIDTH, Math.max(280, viewportWidth * 0.38)));
+}
+
+function getMacPaperZoneWidth(viewportWidth: number) {
+  return getMacPaperWidth(viewportWidth) + 20;
+}
+
+function clampPosition(x: number, y: number, paperWidth: number) {
+  const minX = -paperWidth * 0.92;
+  const maxX = window.innerWidth - paperWidth * 0.08;
+  const minY = -paperWidth * 0.35;
   const maxY = window.innerHeight - 72;
   return {
     x: Math.max(minX, Math.min(maxX, x)),
@@ -20,14 +28,20 @@ function clampPosition(x: number, y: number) {
   };
 }
 
-function initialPaperPosition() {
-  const x = window.innerWidth - PAPER_ZONE_WIDTH + Math.max(8, (PAPER_ZONE_WIDTH - PAPER_WIDTH) / 2);
-  return clampPosition(x, 72);
+function initialPaperPosition(paperWidth: number, macLayout: boolean) {
+  const zoneWidth = macLayout ? getMacPaperZoneWidth(window.innerWidth) : PAPER_ZONE_WIDTH;
+  const x = window.innerWidth - zoneWidth + Math.max(8, (zoneWidth - paperWidth) / 2);
+  return clampPosition(x, 72, paperWidth);
 }
 
-export function GraduatePaperFloat() {
+type GraduatePaperFloatProps = {
+  macLayout?: boolean;
+};
+
+export function GraduatePaperFloat({ macLayout = false }: GraduatePaperFloatProps) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [paperWidth, setPaperWidth] = useState(PAPER_WIDTH);
   const [pos, setPos] = useState({ x: 0, y: 72 });
   const [dragging, setDragging] = useState(false);
   const [holdHint, setHoldHint] = useState(false);
@@ -46,10 +60,32 @@ export function GraduatePaperFloat() {
 
   useEffect(() => {
     setMounted(true);
-    setPos(initialPaperPosition());
+    const resolveWidth = () => (macLayout ? getMacPaperWidth(window.innerWidth) : PAPER_WIDTH);
+
+    const syncLayout = (resetPosition = false) => {
+      const nextWidth = resolveWidth();
+      setPaperWidth(nextWidth);
+      setPos((prev) =>
+        resetPosition
+          ? initialPaperPosition(nextWidth, macLayout)
+          : clampPosition(prev.x, prev.y, nextWidth),
+      );
+    };
+
+    syncLayout(true);
     const t = window.setTimeout(() => setVisible(true), 60);
-    return () => window.clearTimeout(t);
-  }, []);
+
+    if (!macLayout) {
+      return () => window.clearTimeout(t);
+    }
+
+    const onResize = () => syncLayout(false);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [macLayout]);
 
   const clearHoldTimer = useCallback(() => {
     if (dragState.current.timer) {
@@ -84,14 +120,17 @@ export function GraduatePaperFloat() {
     [clearHoldTimer, pos.x, pos.y],
   );
 
-  const onPointerMove = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
-    const state = dragState.current;
-    if (event.pointerId !== state.pointerId) return;
-    if (!state.active) return;
-    const dx = event.clientX - state.startX;
-    const dy = event.clientY - state.startY;
-    setPos(clampPosition(state.originX + dx, state.originY + dy));
-  }, []);
+  const onPointerMove = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      const state = dragState.current;
+      if (event.pointerId !== state.pointerId) return;
+      if (!state.active) return;
+      const dx = event.clientX - state.startX;
+      const dy = event.clientY - state.startY;
+      setPos(clampPosition(state.originX + dx, state.originY + dy, paperWidth));
+    },
+    [paperWidth],
+  );
 
   const onPointerUp = useCallback(
     (event: React.PointerEvent<HTMLDivElement>) => {
@@ -111,11 +150,13 @@ export function GraduatePaperFloat() {
 
   if (!mounted) return null;
 
+  const paperHeight = Math.round(paperWidth * (896 / PAPER_WIDTH));
+
   return createPortal(
     <div
       ref={panelRef}
       className={`audit-paper-float${visible ? " is-visible" : ""}${dragging ? " is-dragging" : ""}${holdHint ? " is-holding" : ""}`}
-      style={{ left: pos.x, top: pos.y, width: PAPER_WIDTH }}
+      style={{ left: pos.x, top: pos.y, width: paperWidth }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -127,11 +168,12 @@ export function GraduatePaperFloat() {
       <Image
         src={PAPER_SRC}
         alt="2034届优秀毕业生信息核对名单（全院公示存档）"
-        width={PAPER_WIDTH}
-        height={896}
+        width={paperWidth}
+        height={paperHeight}
         className="audit-paper-float__img"
         draggable={false}
         priority
+        sizes={macLayout ? `${paperWidth}px` : `${PAPER_WIDTH}px`}
       />
     </div>,
     document.body,

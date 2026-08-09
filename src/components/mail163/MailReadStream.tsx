@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { MailBodyBlock, OpenMail } from "@/data/mail163";
+import { GameLink } from "@/components/game/GameLink";
 import { useGame } from "@/lib/game-state";
 import { cn } from "@/lib/utils";
 
@@ -143,15 +143,9 @@ export function MailReadStream({
         "text-[17px] text-[#1a5fb4] underline decoration-[#1a5fb4]/40 underline-offset-2 hover:text-[#0d4a8f]";
       return (
         <RevealItem key={index} index={nextIndex()} active={active} className="my-4">
-          {block.external ? (
-            <Link href={block.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              {block.content}
-            </Link>
-          ) : (
-            <Link href={block.href} className={linkClass}>
-              {block.content}
-            </Link>
-          )}
+          <GameLink href={block.href} newTab={block.external} className={linkClass}>
+            {block.content}
+          </GameLink>
         </RevealItem>
       );
     }

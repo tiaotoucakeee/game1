@@ -29,7 +29,7 @@ function persistEnding(patch: Record<string, unknown>) {
 
 export default function AuditPathInvitePage() {
   const router = useRouter();
-  const { clues, hasClue, auditTerminalUnlocked, setEnding } = useGame();
+  const { ready, clues, hasClue, auditTerminalUnlocked, setEnding } = useGame();
   const [typed, setTyped] = useState("");
   const [typingDone, setTypingDone] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -57,10 +57,11 @@ export default function AuditPathInvitePage() {
   }, []);
 
   useEffect(() => {
+    if (!ready) return;
     if (!auditTerminalUnlocked || !coreComplete || !codeReady) {
       router.replace("/audit/submit");
     }
-  }, [auditTerminalUnlocked, coreComplete, codeReady, router]);
+  }, [ready, auditTerminalUnlocked, coreComplete, codeReady, router]);
 
   useEffect(() => {
     if (!auditTerminalUnlocked || !coreComplete || !codeReady) return;

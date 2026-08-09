@@ -51,7 +51,7 @@ export const AUDIT_CREDS = {
 
 export const CYA_CREDS = {
   username: "CYA-0000",
-  /** 旧 CYA 终端密码（叙事线索）；学生个人系统请用 Project2024! */
+  /** Creative Yard 连写 + 2030（见内部附件 · 韩老师留言） */
   password: "CreativeYard2030",
 };
 
@@ -68,6 +68,53 @@ export const CLUE_LABELS: Record<ClueId, string> = {
   cya_truth: "程野是误识别的创作路径账号",
   personal_rejected: "个人毕业项目多次退回",
   open_path_code: "需向 Ani AI 询问项目招募码",
+};
+
+/** W13 线索 ↔ 对应页面（设计/提示用） */
+export const CLUE_SOURCES: Record<
+  ClueId,
+  { page: string; trigger: string }
+> = {
+  identity_no_enrollment: {
+    page: "审核工作台 · W04 学生档案查询",
+    trigger: "查询学号 2034020103，打开程野档案",
+  },
+  identity_cya_code: {
+    page: "审核工作台 · W04 学生档案查询",
+    trigger: "同上，档案内可见内部编号 CYA-0000",
+  },
+  project_award_anomaly: {
+    page: "学院官网 · 创新成果奖新闻",
+    trigger: "/anima/news/innovation-award-2034，点击团队表格触发异常",
+  },
+  project_lin_che: {
+    page: "学院官网 / 审核工作台",
+    trigger: "创新成果奖新闻、W04 查 2030120401、W12 查 CYA-P-2034-01、W07 实验室记录等",
+  },
+  ai_ani_platform: {
+    page: "审核工作台 · W12 学生项目查询",
+    trigger: "查询 CYA-P-2034-02，打开《山海行灯》立项书",
+  },
+  ai_cross_media: {
+    page: "审核工作台 · 内部附件",
+    trigger: "W12 山海行灯立项书 →「查看内部附件」→ /audit/attachments",
+  },
+  ai_creative_path: {
+    page: "审核工作台 · 内部附件",
+    trigger: "/audit/attachments 聊天记录中出现「创作路径账号」",
+  },
+  cya_truth: {
+    page: "审核工作台 · W12 学生项目查询",
+    trigger: "查询 CYA-P-2030-01 或 CYA-0000，打开 CYA 主项目立项书",
+  },
+  personal_rejected: {
+    page: "学生个人系统 · 毕业项目管理",
+    trigger: "/student/project（祁玉账号登录，非程野）",
+  },
+  open_path_code: {
+    page: "学生个人系统 · Ani AI",
+    trigger: "/student/home 打开 Ani 对话，可说「我想加入创作路径计划/账户」获取招募码",
+  },
 };
 
 export function getBonusClueLabel(clueId: ClueId, collected: boolean): string {
@@ -207,11 +254,11 @@ export const CHENG_YE = {
   ] as const,
 };
 
-/** 程野 · CYA 路径账号在学生个人系统的登录凭据（学院统一初始密码） */
+/** 程野 · CYA 路径账号在学生个人系统的登录凭据（规则见内部附件聊天记录） */
 export const CHENG_YE_STUDENT_CREDS = {
   studentId: CHENG_YE.studentId,
   accountId: CHENG_YE.internalId,
-  password: PLAYER.studentPassword,
+  password: CYA_CREDS.password,
 } as const;
 
 export type GraduateRecord = {
@@ -499,9 +546,9 @@ export function searchSite(query: string): SearchResult[] | "scary" | "empty" {
 
   if (q.includes("ani") || q.includes("智能畅课") || q.includes("ani ai")) {
     results.push({
-      title: "Ani AI 智能畅课平台",
-      desc: "AI辅助创作系统介绍与优秀案例",
-      href: "/anima/ani-ai",
+      title: "Ani AI 智能畅课平台正式启用",
+      desc: "2030-09-01 · 智能教学与创作辅助系统面向全院学生正式启用",
+      href: "/anima/news/ani-ai-launch",
     });
   }
 
@@ -513,14 +560,6 @@ export function searchSite(query: string): SearchResult[] | "scary" | "empty" {
         href: "/anima/education",
       });
     }
-  }
-
-  if (q.includes("cya") || q.includes("0000")) {
-    results.push({
-      title: "创作路径账号 · 学生个人系统",
-      desc: "Creative Yard Agent · CYA-0000 · 程野",
-      href: "/student",
-    });
   }
 
   if (q.includes("创新成果") || q.includes("未命名之路")) {

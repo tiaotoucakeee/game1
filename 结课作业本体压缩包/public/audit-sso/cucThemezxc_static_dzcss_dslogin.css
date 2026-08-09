@@ -1,0 +1,436 @@
+.imgWrap {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.imgWrap img {
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.active1 {
+	display: block !important;
+}
+
+.language_switch {
+	display: none;
+}
+
+.auth-language {
+	width: 134px;
+	overflow: hidden;
+	border-radius: 15px;
+	margin-bottom: 42px;
+	top: 30px;
+	position: fixed;
+	right: 30px;
+}
+
+.auth-language button {
+	width: 67px;
+	height: 34px;
+	border: none;
+	cursor: pointer;
+	background: rgba(255, 255, 255, 0.5);
+	vertical-align: middle;
+	color: #FFFFFF;
+	font-family: PingFang SC;
+	font-weight: semibold;
+	font-size: 14px;
+	line-height: 34px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+
+.active {
+	background: rgba(150, 37, 20, 0.58) !important;
+}
+
+.login_bottom {
+	position: absolute;
+	bottom: 20px;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+}
+
+.login_navs {
+	margin-bottom: 20px;
+}
+
+.login_navs img {
+	width: 40px;
+	margin: 0 15px;
+	cursor: pointer;
+}
+
+.banquan {
+	font-size: 12px;
+	color: #fff;
+	padding: 2px 0;
+	background: rgba(138, 138, 137, .4);
+	width: 100%;
+	position: absolute;
+}
+
+
+.contentwrap1 {
+	margin: calc(50vh - 300px) auto 0;
+	width: 665px;
+	position: relative;
+
+}
+
+.wrap1 {
+	width: 100%;
+	border-radius: 15px;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+}
+
+.dz_ewm {
+	width: 261px;
+	color: #fff;
+	font-size: 18px;
+	float: right;
+	text-align: center;
+	position: relative;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.main1 {
+	width: 328px;
+	float: left;
+	/* padding: 48px 38px; */
+	padding: 48px 38px 25px;
+	position: relative;
+	background: rgba(68, 68, 68, 0.8);
+}
+
+.footer {
+	display: none !important;
+}
+
+.tabHead {
+	background: none !important;
+	width: calc(100% - 77px) !important;
+}
+
+.container .btn .login-btn {
+	border-radius: 4px !important;
+	background: #962514 !important;
+	box-shadow: 0px 0px 7px 0px #0B000A33 !important;
+	height: 40px !important;
+	line-height: 40px !important;
+	color: #FFFFFF;
+	font-family: Microsoft YaHei UI;
+	font-size: 16px;
+	letter-spacing: 0px;
+	text-align: center;
+}
+
+.form .m-account,
+.form .m-phone {
+	background: none;
+}
+
+.form .m-account .item,
+.form .m-phone .item {
+	margin-bottom: 16px;
+	border-radius: 4px;
+	background: #FFFFFF;
+	border: 1px solid #E0E0E0;
+}
+
+.form .m-account>div.username>input,
+.form .m-phone>div.username>input {
+	padding: 17px 5px;
+	width: 255px
+}
+
+.form .m-account>div.password>input {
+	padding: 17px 5px;
+	width: 255px
+}
+
+.form .m-account>div.captcha>input,
+.form .m-phone>div.captcha>input,
+.form .m-phone>div.code>input {
+	padding: 17px 5px;
+
+}
+
+.m-rememberMe {
+	margin: 0;
+}
+
+.container .btn {
+	margin-top: 48px;
+}
+
+.container .help .activation-account {
+	color: #fff !important;
+	border-right: none;
+	float: left;
+	padding: 0px !important;
+}
+
+.container .help .fo-password {
+	color: #fff !important;
+	float: right;
+}
+
+.container .help {
+	width: 100%;
+}
+
+.form .prex-icon {
+	top: 4px;
+}
+
+#iframe {
+	width: 440px;
+	height: 410px;
+	transform: scale(0.3);
+	transform-origin: 0 0;
+	margin-top: 122px;
+}
+
+.qr_scan_box {
+	position: absolute !important;
+	background: transparent !important;
+	width: 150px !important;
+	height: 150px !important;
+	right: 35px !important;
+	top: 115px !important;
+}
+
+.qr_scan_Invalid {
+	width: 150px !important;
+	height: 150px !important;
+	margin: 0 auto !important;
+}
+
+.qr_scan_Invalid img {
+	top: 37px !important;
+	left: 36px !important;
+}
+
+.qr_scan_code img {
+	width: 150px !important;
+	height: 150px !important;
+	margin: 0 auto !important;
+
+}
+
+#qr_refresh {
+	width: 80px !important;
+	height: 80px !important;
+}
+
+.qr_scan_success {
+	margin-top: -45px !important;
+}
+
+.login-qrcode>div img {
+	margin-bottom: 10px !important;
+}
+
+.qr_scan_success img {
+	width: 50px !important;
+	height: 50px !important;
+}
+
+.login-qrcode>div span.title {
+	font-size: 1px !important;
+	font-weight: 500;
+}
+
+.qr_scan_success .title_h1 {
+	color: #fff !important;
+	display: inline-block !important;
+	width: 100% !important;
+}
+
+.qr_scan_success .sub_title {
+	font-size: 13px;
+}
+
+.tipstitle {
+	font-size: 14px;
+	letter-spacing: 3px;
+	position: absolute;
+	top: 280px !important;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#qrLoginForm span {
+	display: none !important;
+}
+
+.otherlogon {
+	position: absolute;
+	right: 35px !important;
+	top: 315px !important;
+	width: 150px;
+	display: flex;
+	justify-content: space-around;
+	cursor: pointer;
+	height: 100px;
+}
+
+.otherlogon span {
+	height: 100px;
+	z-index: 999;
+}
+
+.otherlogon span img {
+	height: 36px;
+}
+
+.qywxsm {
+	color: #333333;
+	font-family: Microsoft YaHei UI;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: left;
+	position: absolute;
+	background: #fff;
+	padding: 5px 9px;
+	border-radius: 4px;
+	top: 55px;
+	z-index: 999;
+}
+
+#showimg {
+	color: #367EF1 !important;
+}
+
+.qywxsm a {
+	color: #367EF1 !important;
+}
+
+.cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .4);
+	display: none;
+	z-index: 999;
+}
+
+.cover img {
+	width: 410px;
+	height: 470px;
+	margin-top: calc(25% - 235px);
+}
+
+.wxhover {
+	top: -30px;
+	color: #fff;
+	font-family: Microsoft YaHei UI;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: left;
+	position: absolute;
+	background: rgba(0, 0, 0, .6);
+	padding: 5px;
+	border-radius: 4px;
+	z-index: 999;
+	left: 54px;
+	display: none;
+}
+
+.jrxyhover {
+	top: -30px;
+	color: #fff;
+	font-family: Microsoft YaHei UI;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0px;
+	text-align: left;
+	position: absolute;
+	background: rgba(0, 0, 0, .6);
+	padding: 5px;
+	border-radius: 4px;
+	z-index: 999;
+	width: 72px;
+	right: 0;
+	display: none;
+}
+
+#triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #fff;
+	position: absolute;
+	z-index: 999;
+	top: 45px;
+	left: 14px;
+}
+
+#iframe {
+	width: 404px;
+	height: 404px;
+	transform: scale(0.54);
+	transform-origin: 0 0;
+	margin-top: -23px;
+}
+
+.iframediv {
+	height: 160px;
+	overflow: hidden;
+	position: absolute;
+	top: 110px;
+	left: 0;
+	width: 218px;
+	left: 21.5px;
+}
+
+#sliderCaptchaDiv {}
+
+.container .logo img {
+	vertical-align: middle;
+}
+
+.tysfrz {
+	font-size: 20px;
+	color: #fff;
+	vertical-align: middle;
+	margin-left: 12px;
+}
+
+.loginFont_a {
+	color: #fff !important;
+}
+
+.selected_underline a {
+	color: #fff !important;
+}
+
+.m-rememberMe {
+	color: #fff !important;
+}
+
+.selected_underline {
+	border-bottom: 3px solid #fff !important;
+}
+
+.school-custom-tip {
+	font-size: 14px;
+	color: #fff;
+	margin-top: 56px;
+	font-weight: 700;
+}

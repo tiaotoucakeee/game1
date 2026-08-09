@@ -13,7 +13,6 @@ export const PAGE_TITLES = {
     truth: "真结局",
     delete: "档案已删除",
     summer: "审核已提交",
-    recruit: "项目招募",
   },
   student: {
     default: "学生个人系统",

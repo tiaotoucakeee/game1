@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense, useEffect, useState, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { AniChatSidebar } from "@/components/student/AniChatSidebar";
+import { StudentPortalUserMenu } from "@/components/student/StudentPortalUserMenu";
 import { StudentPortalHero } from "@/components/student/StudentPortalHero";
 import { CHENG_YE, PLAYER } from "@/data/game";
 import { useGame } from "@/lib/game-state";
@@ -16,7 +17,7 @@ function StudentPortalShellInner({
   showHero?: boolean;
 }) {
   const searchParams = useSearchParams();
-  const { setStudentLoggedIn, studentPersona } = useGame();
+  const { studentPersona } = useGame();
   const [chatOpen, setChatOpen] = useState(false);
   const isChengYe = studentPersona === "cheng_ye";
   const displayName = isChengYe ? CHENG_YE.name : PLAYER.name;
@@ -26,11 +27,6 @@ function StudentPortalShellInner({
       setChatOpen(true);
     }
   }, [searchParams]);
-
-  function handleLogout() {
-    setStudentLoggedIn(false);
-    window.location.href = "/student";
-  }
 
   return (
     <div className={`student-portal${isChengYe ? " student-portal--cya" : ""}${chatOpen ? " is-chat-open" : ""}`}>
@@ -58,10 +54,7 @@ function StudentPortalShellInner({
                 <span className="student-portal__cya-tag">CYA-0000</span>
               ) : null}
               <span className="student-portal__topbar-link">中文</span>
-              <button type="button" className="student-portal__user" onClick={handleLogout}>
-                <span className="student-portal__avatar">{displayName.slice(0, 1)}</span>
-                <span>{displayName}</span>
-              </button>
+              <StudentPortalUserMenu displayName={displayName} />
             </div>
           </div>
         </header>

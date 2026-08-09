@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ClueTrigger } from "@/components/game/ClueTrigger";
 import { StudentGate } from "@/components/game/SystemGate";
 import { AniChatSidebar } from "@/components/student/AniChatSidebar";
+import { StudentPortalUserMenu } from "@/components/student/StudentPortalUserMenu";
 import { ChengYeMajorLabel } from "@/components/student/ChengYeMajorLabel";
 import { CHENG_YE, PLAYER, PLAYER_PROFILE } from "@/data/game";
 import {
@@ -149,7 +150,7 @@ function ProfileCard({ isChengYe }: { isChengYe: boolean }) {
 
 function StudentPortalHomeInner() {
   const searchParams = useSearchParams();
-  const { setStudentLoggedIn, studentPersona } = useGame();
+  const { studentPersona } = useGame();
   const [query, setQuery] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
 
@@ -168,11 +169,6 @@ function StudentPortalHomeInner() {
       setChatOpen(true);
     }
   }, [searchParams]);
-
-  function handleLogout() {
-    setStudentLoggedIn(false);
-    window.location.href = "/student";
-  }
 
   return (
     <div
@@ -203,10 +199,7 @@ function StudentPortalHomeInner() {
                 <span className="student-portal__cya-tag">CYA-0000</span>
               ) : null}
               <span className="student-portal__topbar-link">中文</span>
-              <button type="button" className="student-portal__user" onClick={handleLogout}>
-                <span className="student-portal__avatar">{displayName.slice(0, 1)}</span>
-                <span>{displayName}</span>
-              </button>
+              <StudentPortalUserMenu displayName={displayName} />
             </div>
           </div>
         </header>

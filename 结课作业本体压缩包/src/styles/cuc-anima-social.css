@@ -1,0 +1,103 @@
+/* 首页 — Bilibili + 关注我们 */
+
+.cuc-before-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 64px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.cuc-before-footer-video {
+  min-width: 0;
+}
+
+.cuc-before-footer-follow {
+  flex-shrink: 0;
+}
+
+.cuc-before-footer-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cuc-before-footer-heading img {
+  flex-shrink: 0;
+}
+
+.cuc-before-footer-heading h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #343a40;
+}
+
+.cuc-before-footer-video-frame {
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.cuc-before-footer-video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+.cuc-before-footer-social-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #da2128;
+}
+
+.cuc-before-footer-social-bar a {
+  display: block;
+  line-height: 0;
+  transition: transform 0.2s ease;
+}
+
+.cuc-before-footer-social-bar a:hover {
+  transform: scale(1.1);
+}
+
+.cuc-before-footer-social-bar img {
+  display: block;
+  width: 80px;
+  height: auto;
+}
+
+@media screen and (max-width: 991px) {
+  .cuc-before-footer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .cuc-before-footer-heading h2 {
+    font-size: 28px;
+  }
+
+  .cuc-before-footer-video-frame iframe {
+    height: 360px;
+  }
+
+  .cuc-before-footer-social-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .cuc-before-footer-social-bar img {
+    width: 64px;
+  }
+}
