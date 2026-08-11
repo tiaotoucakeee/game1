@@ -1,20 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "@/components/cuc-anima/HeroVideo";
 import { siteAssets } from "@/data/cuc-anima";
 
 export function HeroSection() {
   return (
     <section className="relative">
       <div className="relative flex h-[320px] items-center justify-center overflow-hidden md:h-[80vh]">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src={siteAssets.heroVideo} type="video/mp4" />
-        </video>
+        <HeroVideo src={siteAssets.heroVideo} />
 
         <a
           href="#welcome"
