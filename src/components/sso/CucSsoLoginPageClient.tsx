@@ -48,7 +48,9 @@ export function CucSsoLoginPageClient({
     const user = String(fd.get("user"));
     const pass = String(fd.get("pass"));
     const rememberMe = fd.get("rememberMe") === "on";
-    if (!onSubmitLogin(user, pass, rememberMe)) {
+    if (onSubmitLogin(user, pass, rememberMe)) {
+      queueMicrotask(() => router.replace(redirectWhenLoggedIn));
+    } else {
       setError(wrongCredentialsMessage);
     }
   }
