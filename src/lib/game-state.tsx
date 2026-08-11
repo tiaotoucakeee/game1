@@ -81,6 +81,14 @@ function resolveAuditSession(merged: GameState): GameState {
   return merged;
 }
 
+function persistGameState(state: GameState) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    /* ignore */
+  }
+}
+
 function readStoredState(): GameState {
   if (typeof window === "undefined") return defaultState;
   try {
@@ -273,40 +281,50 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         return { ...s, auditLoggedIn: true };
       }),
     loginAudit: (remember) => {
-      if (remember) {
-        sessionStorage.removeItem(AUDIT_SESSION_KEY);
-        setState((s) => ({
+      setState((s) => {
+        if (remember) {
+          sessionStorage.removeItem(AUDIT_SESSION_KEY);
+          const next = {
+            ...s,
+            auditLoggedIn: true,
+            auditRememberUntil: Date.now() + REMEMBER_MS,
+          };
+          persistGameState(next);
+          return next;
+        }
+        sessionStorage.setItem(AUDIT_SESSION_KEY, "1");
+        const next = {
           ...s,
           auditLoggedIn: true,
-          auditRememberUntil: Date.now() + REMEMBER_MS,
-        }));
-        return;
-      }
-      sessionStorage.setItem(AUDIT_SESSION_KEY, "1");
-      setState((s) => ({
-        ...s,
-        auditLoggedIn: true,
-        auditRememberUntil: null,
-      }));
+          auditRememberUntil: null,
+        };
+        persistGameState(next);
+        return next;
+      });
     },
     loginStudent: (remember, persona = "player") => {
-      if (remember) {
-        sessionStorage.removeItem(STUDENT_SESSION_KEY);
-        setState((s) => ({
+      setState((s) => {
+        if (remember) {
+          sessionStorage.removeItem(STUDENT_SESSION_KEY);
+          const next = {
+            ...s,
+            studentLoggedIn: true,
+            studentRememberUntil: Date.now() + REMEMBER_MS,
+            studentPersona: persona,
+          };
+          persistGameState(next);
+          return next;
+        }
+        sessionStorage.setItem(STUDENT_SESSION_KEY, "1");
+        const next = {
           ...s,
           studentLoggedIn: true,
-          studentRememberUntil: Date.now() + REMEMBER_MS,
+          studentRememberUntil: null,
           studentPersona: persona,
-        }));
-        return;
-      }
-      sessionStorage.setItem(STUDENT_SESSION_KEY, "1");
-      setState((s) => ({
-        ...s,
-        studentLoggedIn: true,
-        studentRememberUntil: null,
-        studentPersona: persona,
-      }));
+        };
+        persistGameState(next);
+        return next;
+      });
     },
     setStudentLoggedIn: (v) =>
       setState((s) => {

@@ -6,27 +6,28 @@ import { isAuditEmbedContext } from "@/lib/audit-embed";
 import { useGame } from "@/lib/game-state";
 
 export function AuditGate({ children }: { children: React.ReactNode }) {
-  const { auditLoggedIn } = useGame();
+  const { auditLoggedIn, ready } = useGame();
   const router = useRouter();
   const embed = isAuditEmbedContext();
 
   useEffect(() => {
-    if (embed) return;
+    if (!ready || embed) return;
     if (!auditLoggedIn) router.replace("/audit");
-  }, [auditLoggedIn, router, embed]);
+  }, [auditLoggedIn, ready, router, embed]);
 
-  if (!embed && !auditLoggedIn) return null;
+  if (!ready || (!embed && !auditLoggedIn)) return null;
   return <>{children}</>;
 }
 
 export function StudentGate({ children }: { children: React.ReactNode }) {
-  const { studentLoggedIn } = useGame();
+  const { studentLoggedIn, ready } = useGame();
   const router = useRouter();
 
   useEffect(() => {
+    if (!ready) return;
     if (!studentLoggedIn) router.replace("/student");
-  }, [studentLoggedIn, router]);
+  }, [studentLoggedIn, ready, router]);
 
-  if (!studentLoggedIn) return null;
+  if (!ready || !studentLoggedIn) return null;
   return <>{children}</>;
 }
