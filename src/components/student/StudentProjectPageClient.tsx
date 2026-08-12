@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { StudentPortalShell } from "@/components/student/StudentPortalShell";
 import { ClueTrigger } from "@/components/game/ClueTrigger";
 import { CHENG_YE, PLAYER } from "@/data/game";
 import {
@@ -204,8 +203,7 @@ export function StudentProjectPageClient() {
   const [tab, setTab] = useState<GraduationProjectTabId>("progress");
 
   return (
-    <StudentPortalShell showHero>
-      <div className={`stu-proj${isChengYe ? " stu-proj--cya" : ""}`}>
+    <div className={`stu-proj${isChengYe ? " stu-proj--cya" : ""}`}>
         {!isChengYe ? <ClueTrigger id="personal_rejected" /> : null}
 
         <nav className="stu-proj__breadcrumb" aria-label="面包屑">
@@ -251,6 +249,5 @@ export function StudentProjectPageClient() {
           </main>
         </div>
       </div>
-    </StudentPortalShell>
   );
 }

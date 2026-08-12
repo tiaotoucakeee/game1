@@ -1195,3 +1195,24 @@
     font-size: 24px;
   }
 }
+
+.student-portal--boot {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.student-portal__boot-inner {
+  color: #64748b;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.student-portal--cya.student-portal--boot {
+  background: #080b09;
+}
+
+.student-portal--cya .student-portal__boot-inner {
+  color: #86efac;
+  font-family: Consolas, "Courier New", monospace;
+}

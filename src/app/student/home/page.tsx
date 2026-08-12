@@ -1,4 +1,3 @@
-import "@/styles/student-portal.css";
 import { StudentPortalHomePage } from "@/components/student/StudentPortalHomeClient";
 
 import { PAGE_TITLES } from "@/lib/page-titles";

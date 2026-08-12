@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
 } from "react";
@@ -255,7 +256,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<GameState>(defaultState);
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setState(readStoredState());
     setReady(true);
   }, []);
@@ -408,10 +409,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     },
     verification,
   };
-
-  if (!ready) {
-    return null;
-  }
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { StudentPortalShell } from "@/components/student/StudentPortalShell";
 import {
   CHENG_YE_COURSE_SIDEBAR,
   CHENG_YE_COURSE_TAB_LABELS,
@@ -16,21 +15,21 @@ import "@/styles/student-project.css";
 
 export function StudentCoursesPageClient() {
   const router = useRouter();
-  const { studentPersona } = useGame();
+  const { studentPersona, ready } = useGame();
   const isChengYe = studentPersona === "cheng_ye";
   const [tab, setTab] = useState<ChengYeCourseTabId>("animation");
 
   useEffect(() => {
+    if (!ready) return;
     if (!isChengYe) router.replace("/student/home");
-  }, [isChengYe, router]);
+  }, [ready, isChengYe, router]);
 
-  if (!isChengYe) return null;
+  if (!ready || !isChengYe) return null;
 
   const courses = getChengYeCoursesByTab(tab);
 
   return (
-    <StudentPortalShell showHero>
-      <div className="stu-proj stu-proj--cya">
+    <div className="stu-proj stu-proj--cya">
         <nav className="stu-proj__breadcrumb" aria-label="面包屑">
           <Link href="/student/home">首页</Link>
           <span className="stu-proj__breadcrumb-sep">{">>"}</span>
@@ -112,6 +111,5 @@ export function StudentCoursesPageClient() {
           </main>
         </div>
       </div>
-    </StudentPortalShell>
   );
 }

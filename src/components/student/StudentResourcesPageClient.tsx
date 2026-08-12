@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { StudentPortalShell } from "@/components/student/StudentPortalShell";
 import {
   CHENG_YE_AI_RESOURCES,
   CHENG_YE_EQUIPMENT_RESOURCES,
@@ -111,19 +110,19 @@ function resourceCount(tab: ChengYeResourceTabId) {
 
 export function StudentResourcesPageClient() {
   const router = useRouter();
-  const { studentPersona } = useGame();
+  const { studentPersona, ready } = useGame();
   const isChengYe = studentPersona === "cheng_ye";
   const [tab, setTab] = useState<ChengYeResourceTabId>("labs");
 
   useEffect(() => {
+    if (!ready) return;
     if (!isChengYe) router.replace("/student/home");
-  }, [isChengYe, router]);
+  }, [ready, isChengYe, router]);
 
-  if (!isChengYe) return null;
+  if (!ready || !isChengYe) return null;
 
   return (
-    <StudentPortalShell showHero>
-      <div className="stu-proj stu-proj--cya">
+    <div className="stu-proj stu-proj--cya">
         <nav className="stu-proj__breadcrumb" aria-label="面包屑">
           <Link href="/student/home">首页</Link>
           <span className="stu-proj__breadcrumb-sep">{">>"}</span>
@@ -177,6 +176,5 @@ export function StudentResourcesPageClient() {
           </main>
         </div>
       </div>
-    </StudentPortalShell>
   );
 }

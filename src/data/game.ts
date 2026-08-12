@@ -273,6 +273,16 @@ export function matchChengYeStudentLogin(user: string, pass: string): boolean {
   return userOk && passOk;
 }
 
+/** 祁玉主账号登录：学号精确匹配，密码大小写不敏感 */
+export function matchPlayerLogin(user: string, pass: string): boolean {
+  const normalizedUser = user.trim();
+  const normalizedPass = pass.trim();
+  return (
+    normalizedUser === PLAYER.studentId &&
+    normalizedPass.toLowerCase() === PLAYER.studentPassword.toLowerCase()
+  );
+}
+
 export type GraduateRecord = {
   seq: number;
   name: string;
