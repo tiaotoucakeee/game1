@@ -261,6 +261,18 @@ export const CHENG_YE_STUDENT_CREDS = {
   password: CYA_CREDS.password,
 } as const;
 
+/** CYA 路径账号登录：账号 CYA-0000 / 学号 2034020103，密码大小写不敏感 */
+export function matchChengYeStudentLogin(user: string, pass: string): boolean {
+  const normalizedUser = user.trim();
+  const normalizedPass = pass.trim();
+  const userOk =
+    normalizedUser === CHENG_YE_STUDENT_CREDS.studentId ||
+    normalizedUser.toUpperCase() === CHENG_YE_STUDENT_CREDS.accountId.toUpperCase();
+  const passOk =
+    normalizedPass.toLowerCase() === CHENG_YE_STUDENT_CREDS.password.toLowerCase();
+  return userOk && passOk;
+}
+
 export type GraduateRecord = {
   seq: number;
   name: string;

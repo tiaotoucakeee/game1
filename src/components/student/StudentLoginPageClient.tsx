@@ -1,6 +1,6 @@
 "use client";
 
-import { CHENG_YE, CHENG_YE_STUDENT_CREDS, PLAYER } from "@/data/game";
+import { matchChengYeStudentLogin, PLAYER } from "@/data/game";
 import { useGame } from "@/lib/game-state";
 import { CucSsoLoginPageClient } from "@/components/sso/CucSsoLoginPageClient";
 
@@ -22,11 +22,7 @@ export function StudentLoginPageClient() {
           return true;
         }
 
-        if (
-          (normalizedUser === CHENG_YE_STUDENT_CREDS.studentId ||
-            normalizedUser.toUpperCase() === CHENG_YE_STUDENT_CREDS.accountId) &&
-          normalizedPass === CHENG_YE_STUDENT_CREDS.password
-        ) {
+        if (matchChengYeStudentLogin(normalizedUser, normalizedPass)) {
           loginStudent(rememberMe, "cheng_ye");
           return true;
         }
